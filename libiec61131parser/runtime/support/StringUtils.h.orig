@@ -1,0 +1,41 @@
+/* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
+ * Use of this file is governed by the BSD 3-clause license that
+ * can be found in the LICENSE.txt file in the project root.
+ */
+
+#pragma once
+
+#include "antlr4-common.h"
+#include <boost/locale.hpp>
+
+namespace antlrcpp {
+
+  
+  // The conversion functions fails in VS2017, so we explicitly use a workaround.
+  template<typename T>
+  inline std::string utf32_to_utf8(T const& data)
+  {
+    // Don't make the converter static or we have to serialize access to it.
+
+      auto p = reinterpret_cast<const int32_t *>(data.data());
+      return boost::locale::conv::utf_to_utf<char> (p, p + data.size());
+
+  }
+
+  inline UTF32String utf8_to_utf32(const char* first, const char* last)
+  {
+
+
+      auto r = boost::locale::conv::utf_to_utf<char32_t> (first, last);
+      UTF32String s = reinterpret_cast<const char32_t *>(r.data());
+
+    
+    return s;
+  }
+
+  void replaceAll(std::string &str, std::string const& from, std::string const& to);
+
+  // string <-> wstring conversion (UTF-16), e.g. for use with Window's wide APIs.
+  ANTLR4CPP_PUBLIC std::string ws2s(std::wstring const& wstr);
+  ANTLR4CPP_PUBLIC std::wstring s2ws(std::string const& str);
+}

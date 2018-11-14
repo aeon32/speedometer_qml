@@ -1,0 +1,13 @@
+// -*- coding:cp1251 -*-
+// -*- кодировка:cp1251 -*-
+#ifndef INFO_H
+#define INFO_H
+
+//В файле содержится информация времени сборки проекта (при запуске сборки)
+
+//время сборки
+#cmakedefine buildTime "${buildTime}"
+//ревизия, из которой была произведена сборка
+#cmakedefine revision  "${revision}"
+
+#endif
