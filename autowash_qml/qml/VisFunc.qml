@@ -117,7 +117,7 @@ Item {
     	    	scaleSegmentsStr = actualScale.toString()
     	    }
 
-    	    //console.log(this.speedValue + " " +scaleSegmentsStr)    	 
+    	    console.log(this.speedValue + " " +scaleSegmentsStr)    	 
 
 	    	var coords = {x:84, y:0}
     		switch (actualScale)
@@ -202,6 +202,7 @@ Item {
            y: 0
            opacity: 1
            visible : speed_scale.speedValue > 0
+           //visible : false
 
         } 
   
@@ -210,6 +211,7 @@ Item {
         source: "images/strelka.png"
         x: 726
         y: 322
+        visible : true
 
 
         opacity: 1
@@ -222,6 +224,18 @@ Item {
 
 
         }
+    }
+
+    Text {
+        id: balance_text
+        text: parent.speedValue
+        font.pixelSize: 35
+        font.family: fonts.boldFont.name
+        color: "#FFFFFF"
+        smooth: true
+        x: 600
+        y: 512
+        opacity: 1
     }
 
 

@@ -51,6 +51,10 @@ public:
         QString qmlFile;
         QString realQmlFile;
         bool qmlDebug;
+        bool demoMode;
+        bool speedometerAnimation;
+        unsigned int animationTime;
+        unsigned int animationSteps;
 	} qmlSettings;
 
     struct CodeSysSettings {

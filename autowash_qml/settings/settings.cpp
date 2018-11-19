@@ -124,6 +124,11 @@ namespace awash {
 
         qmlSettings.qmlFile = qsettings.value("qml/qml_file", "${SHAREDIR}" +QString("/") + QString(PROJECT_NAME) + QString("/qml/main.qml")).toString();
         qmlSettings.qmlDebug = qsettings.value("qml/qml_debug", QVariant(false)).toBool();
+        qmlSettings.demoMode = qsettings.value("qml/demo_mode", QVariant(false)).toBool();
+        qmlSettings.speedometerAnimation = qsettings.value("qml/speedometer_animation", QVariant(true)).toBool();
+        qmlSettings.animationTime = qsettings.value("qml/animation_time", 500).toInt();
+        qmlSettings.animationSteps = qsettings.value("qml/animation_steps", 5).toInt();
+
         codeSysSettings.gvlFile = qsettings.value("codesys/gvl_file", "${SHAREDIR}" +QString("/") + QString(PROJECT_NAME) + QString("/gvl/NVL2UI.gvl")).toString();
 
 
@@ -155,10 +160,16 @@ namespace awash {
 		qsettings->setValue("listening/port", listeningSettings.port);
 		qsettings->setValue("listening/cob_id", listeningSettings.cob_id);
 
-		qsettings->setValue("listening/cob_id", listeningSettings.cob_id);
+
 
 		qsettings->setValue("qml/qml_file",  qmlSettings.qmlFile );
 		qsettings->setValue("qml/qml_debug", qmlSettings.qmlDebug);
+        qsettings->setValue("qml/demo_mode", qmlSettings.demoMode);
+        qsettings->setValue("qml/speedometer_animation", qmlSettings.speedometerAnimation);
+
+        qsettings->setValue("qml/animation_time", qmlSettings.animationTime);
+        qsettings->setValue("qml/animation_steps", qmlSettings.animationSteps);
+
 		qsettings->setValue("codesys/gvl_file", codeSysSettings.gvlFile);
 
 	};

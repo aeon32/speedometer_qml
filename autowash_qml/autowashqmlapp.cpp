@@ -34,8 +34,6 @@ namespace
 
 const char * PROGNAME = PROJECT_NAME;
 
-const int ANIMATION_TIME = 500;
-const int ANIMATION_STEPS = 10;
 
 };
 
@@ -45,7 +43,7 @@ const int ANIMATION_STEPS = 10;
 ******************************************************************************/
 
 AutoWashQmlApp::AutoWashQmlApp(int argc, char **argv):QApplication(argc, argv), argC(argc), argV(argV),
-    engine(nullptr),  receivableTelegram(nullptr), socket(nullptr), testTimer(this), testMode(0), timeOutTimer(this), oldButtonActive(-1),
+    engine(nullptr),  receivableTelegram(nullptr), socket(nullptr), testTimer(this), testMoneyIndexValue(0), timeOutTimer(this), oldButtonActive(-1),
     lastPostCounterFund(0), animationPostCounterFund(0)
 {
 
@@ -222,19 +220,33 @@ void AutoWashQmlApp::on_codesysTelegramReceived(QString IP, unsigned int port, u
 
 void AutoWashQmlApp::setNewPostCounterFund(unsigned int newPostCounterFund)
 {
+
+
     if (newPostCounterFund >=0 && newPostCounterFund != lastPostCounterFund)
     {
+        if (settings->qmlSettings.speedometerAnimation)
+        {
 
-        postCounterFundAnimationStep = newPostCounterFund -   animationPostCounterFund;
-        postCounterFundAnimationStep = postCounterFundAnimationStep / ANIMATION_TIME;
+
+            postCounterFundAnimationStep = newPostCounterFund -   animationPostCounterFund;
+            postCounterFundAnimationStep = postCounterFundAnimationStep / settings->qmlSettings.animationTime;
 
 
+
+            animationElapsedTimer.restart();
+            animationTimer.start(settings->qmlSettings.animationTime / settings->qmlSettings.animationSteps);
+        }
+        else
+        {
+            QVariantMap variantMap;
+            variantMap.insert(QString("postCounterFund"), QVariant(newPostCounterFund));
+            QVariant returnedValue;
+            QMetaObject::invokeMethod(qmlRoot, "setVariables",
+                              Q_RETURN_ARG(QVariant, returnedValue),
+                              Q_ARG(QVariant, QJsonObject::fromVariantMap(variantMap)));
+
+        };
         lastPostCounterFund = newPostCounterFund;
-
-
-
-        animationElapsedTimer.restart();
-        animationTimer.start(ANIMATION_TIME / ANIMATION_STEPS);
 
     };
 };
@@ -247,7 +259,9 @@ void AutoWashQmlApp::on_animationTimerTimeout()
     if (animationPostCounterFundInt < 0)
         animationPostCounterFundInt = 0;
 
-    if (animationPostCounterFundInt >= lastPostCounterFund)
+    if ( (postCounterFundAnimationStep >= 0  && animationPostCounterFundInt >= lastPostCounterFund)  ||
+            (postCounterFundAnimationStep < 0  && animationPostCounterFundInt <= lastPostCounterFund)
+       )
     {
 
         animationPostCounterFundInt = lastPostCounterFund;
@@ -255,20 +269,23 @@ void AutoWashQmlApp::on_animationTimerTimeout()
         animationTimer.stop();
     };
 
-        QVariantMap variantMap;
+    QVariantMap variantMap;
 
-        variantMap.insert(QString("postCounterFund"), QVariant(animationPostCounterFundInt));
+    variantMap.insert(QString("postCounterFund"), QVariant(animationPostCounterFundInt));
 
-        QVariant returnedValue;
-        QMetaObject::invokeMethod(qmlRoot, "setVariables",
-                                  Q_RETURN_ARG(QVariant, returnedValue),
-                                  Q_ARG(QVariant, QJsonObject::fromVariantMap(variantMap))
-                                 );
+    QVariant returnedValue;
+    QMetaObject::invokeMethod(qmlRoot, "setVariables",
+                              Q_RETURN_ARG(QVariant, returnedValue),
+                              Q_ARG(QVariant, QJsonObject::fromVariantMap(variantMap))
+                             );
 
 }
 
 void AutoWashQmlApp::on_dataAvailable()
 {
+
+    if (settings->qmlSettings.demoMode)
+        return;
 
     QStringList dataStrings;
     receivableTelegram->dataToStringList(dataStrings);
@@ -289,9 +306,10 @@ void AutoWashQmlApp::on_dataAvailable()
         if (*netVariableNamesIt == "postCounterFund" )
         {
             setNewPostCounterFund(data.toUInt());
-        } else
+        }
+        else
         {
-           variantMap.insert((*netVariableNamesIt), data);
+            variantMap.insert((*netVariableNamesIt), data);
         };
 
     };
@@ -373,11 +391,14 @@ int AutoWashQmlApp::run()
     setQMLDebugFlag(settings->qmlSettings.qmlDebug);
 
 
-    testTimer.setInterval(1000);
-    //testTimer.start();
+    testTimer.setInterval(3000);
+
+    if (settings->qmlSettings.demoMode)
+        testTimer.start();
 
     timeOutTimer.setInterval(4000);
-    timeOutTimer.start();
+    if (!settings->qmlSettings.demoMode)
+        timeOutTimer.start();
 
     int res = QApplication::exec();
     return res;
@@ -404,42 +425,19 @@ void AutoWashQmlApp::setPostMode(unsigned int mode)
 
 void AutoWashQmlApp::on_testTimerTimeout()
 {
-    const int TEST_VALUES_N = 5;
+    const int TEST_VALUES_N = 10;
 
-    const int TEST_VALUES [TEST_VALUES_N] = {0, 50, 100, 150, 200};
-
-
-    /*
-
-    QVariantMap variantMap;
-
-    for (QStringList::iterator netVariableNamesIt = netVariableNames.begin(); netVariableNamesIt != netVariableNames.end(); ++netVariableNamesIt)
-    {
-        if (*netVariableNamesIt == "postMode")
-        {
-            variantMap.insert((*netVariableNamesIt), QVariant(TEST_VALUES[testMode]));
-        }
-        else
-        {
-            variantMap.insert((*netVariableNamesIt), QVariant(0));
-        };
+    const int TEST_VALUES [TEST_VALUES_N] = {0, 50, 100, 150, 200, 250, 200, 150, 100, 50};
 
 
-    };
 
+    EOM_LOG_DEBUG<<"New money value "<<TEST_VALUES[testMoneyIndexValue]<<eom::endl;
 
-    QVariant returnedValue;
-    QMetaObject::invokeMethod(qmlRoot, "setVariables",
-                              Q_RETURN_ARG(QVariant, returnedValue),
-                              Q_ARG(QVariant, QJsonObject::fromVariantMap(variantMap))
-                             );
-    */
+    testMoneyIndexValue ++;
+    if (testMoneyIndexValue == TEST_VALUES_N)
+        testMoneyIndexValue = 0;
 
-    testMode++;
-    if (testMode == TEST_VALUES_N)
-        testMode = 0;
-
-    setNewPostCounterFund(TEST_VALUES[testMode]);
+    setNewPostCounterFund(TEST_VALUES[testMoneyIndexValue]);
 
 
 };

@@ -58,7 +58,7 @@ namespace awash {
 		int oldButtonActive;
 
 
-		unsigned int testMode;
+		unsigned int testMoneyIndexValue;
 		unsigned int lastPostCounterFund;
 
 		double animationPostCounterFund;
