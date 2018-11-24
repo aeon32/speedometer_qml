@@ -207,8 +207,10 @@ ApplicationWindow {
 
      }
 
-    function setQmlDebug(debugFlag) {
+    function setQmlSettings(debugFlag, speedometerAnimation, animationTime) {
         variablesView.visible = debugFlag;
+        visFunc.speedometer_animation = speedometerAnimation;
+        visFunc.animation_time = animationTime;
     }
 
      Item {

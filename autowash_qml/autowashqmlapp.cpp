@@ -44,7 +44,7 @@ const char * PROGNAME = PROJECT_NAME;
 
 AutoWashQmlApp::AutoWashQmlApp(int argc, char **argv):QApplication(argc, argv), argC(argc), argV(argV),
     engine(nullptr),  receivableTelegram(nullptr), socket(nullptr), testTimer(this), testMoneyIndexValue(0), timeOutTimer(this), oldButtonActive(-1),
-    lastPostCounterFund(0), animationPostCounterFund(0)
+    lastPostCounterFund(0)
 {
 
     app = this;
@@ -55,7 +55,6 @@ AutoWashQmlApp::AutoWashQmlApp(int argc, char **argv):QApplication(argc, argv), 
     connect(&testTimer, SIGNAL(timeout()), this, SLOT(on_testTimerTimeout()));
     connect(&timeOutTimer, SIGNAL(timeout()), this, SLOT(on_timeOutTimerTimeout()));
 
-    connect(&animationTimer, SIGNAL(timeout()), this, SLOT(on_animationTimerTimeout()));
 
     timeOutTimer.setSingleShot(true);
 
@@ -224,62 +223,18 @@ void AutoWashQmlApp::setNewPostCounterFund(unsigned int newPostCounterFund)
 
     if (newPostCounterFund >=0 && newPostCounterFund != lastPostCounterFund)
     {
-        if (settings->qmlSettings.speedometerAnimation)
-        {
 
+        QVariantMap variantMap;
+        variantMap.insert(QString("postCounterFund"), QVariant(newPostCounterFund));
+        QVariant returnedValue;
+        QMetaObject::invokeMethod(qmlRoot, "setVariables",
+                                  Q_RETURN_ARG(QVariant, returnedValue),
+                                  Q_ARG(QVariant, QJsonObject::fromVariantMap(variantMap)));
 
-            postCounterFundAnimationStep = newPostCounterFund -   animationPostCounterFund;
-            postCounterFundAnimationStep = postCounterFundAnimationStep / settings->qmlSettings.animationTime;
-
-
-
-            animationElapsedTimer.restart();
-            animationTimer.start(settings->qmlSettings.animationTime / settings->qmlSettings.animationSteps);
-        }
-        else
-        {
-            QVariantMap variantMap;
-            variantMap.insert(QString("postCounterFund"), QVariant(newPostCounterFund));
-            QVariant returnedValue;
-            QMetaObject::invokeMethod(qmlRoot, "setVariables",
-                              Q_RETURN_ARG(QVariant, returnedValue),
-                              Q_ARG(QVariant, QJsonObject::fromVariantMap(variantMap)));
-
-        };
-        lastPostCounterFund = newPostCounterFund;
 
     };
 };
 
-void AutoWashQmlApp::on_animationTimerTimeout()
-{
-    animationPostCounterFund += postCounterFundAnimationStep * animationElapsedTimer.elapsed();
-    int animationPostCounterFundInt = (int) animationPostCounterFund + 0.5;
-
-    if (animationPostCounterFundInt < 0)
-        animationPostCounterFundInt = 0;
-
-    if ( (postCounterFundAnimationStep >= 0  && animationPostCounterFundInt >= lastPostCounterFund)  ||
-            (postCounterFundAnimationStep < 0  && animationPostCounterFundInt <= lastPostCounterFund)
-       )
-    {
-
-        animationPostCounterFundInt = lastPostCounterFund;
-        animationPostCounterFund = lastPostCounterFund;
-        animationTimer.stop();
-    };
-
-    QVariantMap variantMap;
-
-    variantMap.insert(QString("postCounterFund"), QVariant(animationPostCounterFundInt));
-
-    QVariant returnedValue;
-    QMetaObject::invokeMethod(qmlRoot, "setVariables",
-                              Q_RETURN_ARG(QVariant, returnedValue),
-                              Q_ARG(QVariant, QJsonObject::fromVariantMap(variantMap))
-                             );
-
-}
 
 void AutoWashQmlApp::on_dataAvailable()
 {
@@ -361,12 +316,15 @@ void AutoWashQmlApp::on_dataAvailable()
     */
 };
 
-void AutoWashQmlApp::setQMLDebugFlag(bool debugFlag)
+void AutoWashQmlApp::setQMLSettings(bool debugFlag, bool animation, int animationTime)
 {
     QVariant returnedValue;
-    QMetaObject::invokeMethod(qmlRoot, "setQmlDebug",
+    QMetaObject::invokeMethod(qmlRoot, "setQmlSettings",
                               Q_RETURN_ARG(QVariant, returnedValue),
-                              Q_ARG(QVariant, debugFlag)
+                              Q_ARG(QVariant, debugFlag),
+                              Q_ARG(QVariant, animation),
+                              Q_ARG(QVariant, animationTime)
+
                              );
 
 
@@ -388,7 +346,9 @@ int AutoWashQmlApp::run()
 
 
     setPostMode(0);
-    setQMLDebugFlag(settings->qmlSettings.qmlDebug);
+    setQMLSettings(settings->qmlSettings.qmlDebug, settings->qmlSettings.speedometerAnimation,
+                   settings->qmlSettings.animationTime);
+
 
 
     testTimer.setInterval(3000);

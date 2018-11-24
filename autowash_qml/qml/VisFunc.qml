@@ -2,6 +2,10 @@ import QtQuick 2.2
 Item {
     id: item;
 
+
+    property bool speedometer_animation : true
+    property int animation_time : 500
+
     property FontsCollections fonts
 
     width:1280
@@ -99,6 +103,11 @@ Item {
     	readonly property real scale_angle : 214
     	property real arrow_angle : zero_angle
 
+     	property bool speedometer_animation : parent.speedometer_animation
+     	property int animation_time : parent.animation_time
+
+
+
     	onScaleSegmentsChanged :
     	{
     	    var scaleSegmentsStr = ''
@@ -167,23 +176,32 @@ Item {
     	    
     	    var newScaleSegments = Math.floor(auxSpeedValue* scale_segments_n / scale_size) 
 
-    		/*
-     		oldSpeedValue = speedValue
-     		animateArrow.running = true
-     		animateScale.to = newScaleSegments
-     		animateScale.running = true
-     		*/
-     		arrowRotate.angle = this.arrow_angle
-     		this.scaleSegments = newScaleSegments
+    		if (this.speedometer_animation) {
+     		  oldSpeedValue = speedValue
+     		  animateArrow.running = true
+     		  animateScale.to = newScaleSegments
+     		  animateScale.running = true
+	          animateBalance.to = speedValue;
+              animateBalance.running = true
+            } else {
+            
+              arrowRotate.angle = this.arrow_angle
+     		  this.scaleSegments = newScaleSegments
+     		  animateBalanse.speed_value = this.speedValue
 
+            }
+     		
+     	
     	}
     	//Behavior on speedValue {
         //	NumberAnimation { duration: 1000 }
     	//}
 
-    	PropertyAnimation {id: animateArrow; target: arrowRotate; properties: "angle"; to: speed_scale.arrow_angle; duration: 150}
+    	PropertyAnimation {id: animateArrow; target: arrowRotate; properties: "angle"; to: speed_scale.arrow_angle; duration: speed_scale.animation_time}
 
-    	PropertyAnimation {id: animateScale; target: speed_scale; properties: "scaleSegments"; to: 0; duration: 150}
+    	PropertyAnimation {id: animateScale; target: speed_scale; properties: "scaleSegments"; to: 0; duration: speed_scale.animation_time}
+
+	    PropertyAnimation {id: animateBalance; target: balance_text; properties: "speed_value"; to: 0; duration: speed_scale.animation_time}
 
         Image {
            id: backgroung
@@ -227,8 +245,9 @@ Item {
     }
 
     Text {
+        property int speed_value : 0
         id: balance_text
-        text: parent.speedValue
+        text : this.speed_value
         font.family: fonts.speedFont.name
 		font.pixelSize: 130
         font.bold: true

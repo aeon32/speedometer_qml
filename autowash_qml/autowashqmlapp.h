@@ -61,10 +61,6 @@ namespace awash {
 		unsigned int testMoneyIndexValue;
 		unsigned int lastPostCounterFund;
 
-		double animationPostCounterFund;
-		double postCounterFundAnimationStep;
-
-
 
         QStringList netVariableNames;
 
@@ -79,21 +75,16 @@ namespace awash {
 
 		void setScreen (unsigned int screen);
 
-		void setQMLDebugFlag(bool debugFlag);
+		void setQMLSettings(bool debugFlag, bool speedometerAnimation, int animationTime);
 
 		void setNewPostCounterFund(unsigned int newPostCounterFund);
 
 		QTimer testTimer;
 		QTimer timeOutTimer;
 
-		QElapsedTimer animationElapsedTimer;
-		QTimer animationTimer;
-
 	private slots:
 		void on_codesysTelegramReceived(QString IP, unsigned int port, unsigned int bytes, unsigned int cobid);
 		void on_dataAvailable();
-
-        void on_animationTimerTimeout();
 
 		void on_testTimerTimeout();
 
