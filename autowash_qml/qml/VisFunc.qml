@@ -92,11 +92,11 @@ Item {
     	property int oldSpeedValue : 19
 
     	readonly property int scale_segments_n : 50
-    	readonly property int  scale_size : 500
+    	readonly property int  scale_size : 200
     	property int scaleSegments : 0
 
-    	readonly property real zero_angle : -173.5
-    	readonly property real scale_angle : 251
+    	readonly property real zero_angle : -155
+    	readonly property real scale_angle : 214
     	property real arrow_angle : zero_angle
 
     	onScaleSegmentsChanged :
@@ -156,11 +156,11 @@ Item {
     	}
 
     	onSpeedValueChanged : {
-    	    //this.speedValue = 500
+    	    //this.speedValue = 200
             var auxSpeedValue = this.speedValue
 
-            if (auxSpeedValue > 500)
-                auxSpeedValue = 500;
+            if (auxSpeedValue > this.scale_size)
+                auxSpeedValue = this.scale_size;
 
 
             this.arrow_angle =  auxSpeedValue * scale_angle / scale_size + zero_angle
@@ -229,13 +229,16 @@ Item {
     Text {
         id: balance_text
         text: parent.speedValue
-        font.pixelSize: 35
-        font.family: fonts.boldFont.name
-        color: "#FFFFFF"
+        font.family: fonts.speedFont.name
+		font.pixelSize: 130
+        font.bold: true
+        color: "#ffffff"
         smooth: true
-        x: 600
-        y: 512
-        opacity: 1
+        x: 640
+        y: 425.5
+        width:0
+        opacity: 1     
+        horizontalAlignment: Text.AlignHCenter  
     }
 
 
