@@ -554,15 +554,17 @@ Item {
            visible : speed_scale.actualScaleSegment== 39
            //visible : false
         }
+
         Image {
-           id: scale_image_40_1
+           id: scale_image_after40_half
            source: "speedometer_scale_images/40_1.png"
            x: 84
            y: 0
            opacity: 1
-           visible : speed_scale.actualScaleSegment== 40
+           visible : speed_scale.actualScaleSegment>= 40
            //visible : false
         }
+
         Image {
            id: scale_image_40_2
            source: "speedometer_scale_images/40_2.png"
@@ -574,15 +576,6 @@ Item {
         }
 
         Image {
-           id: scale_image_41_1
-           source: "speedometer_scale_images/41_1.png"
-           x: 84
-           y: 0
-           opacity: 1
-           visible : speed_scale.actualScaleSegment== 41
-           //visible : false
-        }
-        Image {
            id: scale_image_41_2
            source: "speedometer_scale_images/41_2.png"
            x: 596
@@ -591,15 +584,7 @@ Item {
            visible : speed_scale.actualScaleSegment== 41
            //visible : false
         }
-        Image {
-           id: scale_image_42_1
-           source: "speedometer_scale_images/42_1.png"
-           x: 84
-           y: 0
-           opacity: 1
-           visible : speed_scale.actualScaleSegment== 42
-           //visible : false
-        }
+
         Image {
            id: scale_image_42_2
            source: "speedometer_scale_images/42_2.png"
@@ -610,15 +595,6 @@ Item {
            //visible : false
         }
 
-        Image {
-           id: scale_image_43_1
-           source: "speedometer_scale_images/43_1.png"
-           x: 84
-           y: 0
-           opacity: 1
-           visible : speed_scale.actualScaleSegment== 43
-           //visible : false
-        }
 
         Image {
            id: scale_image_43_2
@@ -631,32 +607,12 @@ Item {
         }
 
         Image {
-           id: scale_image_44_1
-           source: "speedometer_scale_images/44_1.png"
-           x: 84
-           y: 0
-           opacity: 1
-           visible : speed_scale.actualScaleSegment== 44
-           //visible : false
-        }
-        Image {
            id: scale_image_44_2
            source: "speedometer_scale_images/44_2.png"
            x: 596
            y: 0
            opacity: 1
            visible : speed_scale.actualScaleSegment== 44
-           //visible : false
-        }
-
-
-        Image {
-           id: scale_image_45_1
-           source: "speedometer_scale_images/45_1.png"
-           x: 84
-           y: 0
-           opacity: 1
-           visible : speed_scale.actualScaleSegment== 45
            //visible : false
         }
 
@@ -671,15 +627,6 @@ Item {
            //visible : false
         }
 
-        Image {
-           id: scale_image_46_1
-           source: "speedometer_scale_images/46_1.png"
-           x: 84
-           y: 0
-           opacity: 1
-           visible : speed_scale.actualScaleSegment== 46
-           //visible : false
-        }
 
         Image {
            id: scale_image_46_2
@@ -693,16 +640,6 @@ Item {
 
 
         Image {
-           id: scale_image_47_1
-           source: "speedometer_scale_images/47_1.png"
-           x: 84
-           y: 0
-           opacity: 1
-           visible : speed_scale.actualScaleSegment== 47
-           //visible : false
-        }
-
-        Image {
            id: scale_image_47_2
            source: "speedometer_scale_images/47_2.png"
            x: 596
@@ -712,15 +649,6 @@ Item {
            //visible : false
         }
 
-        Image {
-           id: scale_image_48_1
-           source: "speedometer_scale_images/48_1.png"
-           x: 84
-           y: 0
-           opacity: 1
-           visible : speed_scale.actualScaleSegment== 48
-           //visible : false
-        }
 
         Image {
            id: scale_image_48_2
@@ -732,15 +660,6 @@ Item {
            //visible : false
         }
 
-        Image {
-           id: scale_image_49_1
-           source: "speedometer_scale_images/49_1.png"
-           x: 84
-           y: 0
-           opacity: 1
-           visible : speed_scale.actualScaleSegment== 49
-           //visible : false
-        }
 
         Image {
            id: scale_image_49_2
