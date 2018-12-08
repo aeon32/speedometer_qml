@@ -230,6 +230,7 @@ void AutoWashQmlApp::setNewPostCounterFund(unsigned int newPostCounterFund)
         QMetaObject::invokeMethod(qmlRoot, "setVariables",
                                   Q_RETURN_ARG(QVariant, returnedValue),
                                   Q_ARG(QVariant, QJsonObject::fromVariantMap(variantMap)));
+        lastPostCounterFund = newPostCounterFund;
 
 
     };
@@ -386,18 +387,21 @@ void AutoWashQmlApp::setPostMode(unsigned int mode)
 void AutoWashQmlApp::on_testTimerTimeout()
 {
     const int TEST_VALUES_N = 10;
-
     const int TEST_VALUES [TEST_VALUES_N] = {0, 50, 100, 150, 200, 250, 200, 150, 100, 50};
 
+    //const int TEST_VALUES_N = 2;
+    //const int TEST_VALUES [TEST_VALUES_N] = {50, 0};
 
 
-    EOM_LOG_DEBUG<<"New money value "<<TEST_VALUES[testMoneyIndexValue]<<eom::endl;
+
 
     testMoneyIndexValue ++;
     if (testMoneyIndexValue == TEST_VALUES_N)
         testMoneyIndexValue = 0;
 
+    EOM_LOG_DEBUG<<"New money value "<<TEST_VALUES[testMoneyIndexValue]<<eom::endl;
     setNewPostCounterFund(TEST_VALUES[testMoneyIndexValue]);
+
 
 
 };
