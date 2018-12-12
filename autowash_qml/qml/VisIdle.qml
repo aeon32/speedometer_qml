@@ -1,36 +1,26 @@
 
 import QtQuick 2.2
+import QtMultimedia 5.6
 import "./qmlelements" as QMLElements
 
 
 Item {
+    id: item
+    width:1280
+    height:1024
 
-
-Rectangle {
-    id: container
-    width: parent.width
-    anchors.centerIn: parent
-
-    gradient: Gradient {
-        GradientStop { position: 0; color: "black"}
-        GradientStop { position: 1; color: "lightsteelblue" }
+    MediaPlayer {
+        id: mediaPlayer
+        autoPlay: true
+        autoLoad: true
+        loops:MediaPlayer.Infinite
+        source:"/usr/share/autowash_qml/video/Idle.mp4"
     }
-    Column {
-        id: column
-        opacity: 0.99 // work around QTBUG-29037
 
-        width: parent.width
-        height: parent.height
-        anchors.horizontalCenter: parent.horizontalCenter
-
-           QMLElements.MoneyTextBox{
-                id : moneyTextBox
-                width: parent.width
-                moneyLabelText : "Ожидание клиента"
-
-            }
-
+    VideoOutput {
+        id:videoOutput
+        source:mediaPlayer
+        anchors.fill: parent
     }
-}
 
 }

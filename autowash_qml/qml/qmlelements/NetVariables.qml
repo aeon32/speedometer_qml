@@ -155,7 +155,7 @@ Item {
                 };
             }
             
-            //this.postMode = 9;
+            this.postMode = 1000;
             //this.postCounterFund= 0;            
             
                     

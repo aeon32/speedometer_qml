@@ -1,10 +1,17 @@
-
 import QtQuick 2.2
 import "./qmlelements" as QMLElements
 
 
 Item {
 
+Image {
+     id: background
+     visible: true
+     source: "images/background.png"
+     x: 0
+     y: 0
+     opacity: 1
+}
 
 Rectangle {
     id: container

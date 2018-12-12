@@ -62,6 +62,21 @@ public:
         QString realGvlFile;
     } codeSysSettings;
 
+    struct VideoSettings {
+        QString activeCleanVideo;
+        QString foamVideo;
+        QString shampooVideo;
+        QString coldWaterVideo;
+        QString hotWaterVideo;
+        QString waxVideo;
+        QString osmoseVideo;
+        QString pauseVideo;
+        QString printVideo;
+        QString helpVideo;
+        QString idleVideo;
+
+    } videoSettings;
+
     //Функция возвращает режим работы программы (по результам парсинга командной строки)
     inline RunMode getRunMode() const {return runMode; } ;
     //Функция возвращает командострочную справку

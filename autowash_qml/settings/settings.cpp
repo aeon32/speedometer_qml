@@ -131,6 +131,18 @@ namespace awash {
 
         codeSysSettings.gvlFile = qsettings.value("codesys/gvl_file", "${SHAREDIR}" +QString("/") + QString(PROJECT_NAME) + QString("/gvl/NVL2UI.gvl")).toString();
 
+        videoSettings.activeCleanVideo = qsettings.value("video/active_clean_btn", "/usr/share/" + QString(PROJECT_NAME) + QString("/video/Idle.mp4") ).toString();
+        videoSettings.coldWaterVideo = qsettings.value("video/coldwater_btn", "/usr/share/" + QString(PROJECT_NAME) + QString("/video/Idle.mp4") ).toString();
+        videoSettings.foamVideo = qsettings.value("video/foam_btn", "/usr/share/" + QString(PROJECT_NAME) + QString("/video/Idle.mp4") ).toString();
+        videoSettings.helpVideo = qsettings.value("video/help_btn", "/usr/share/" + QString(PROJECT_NAME) + QString("/video/Idle.mp4") ).toString();
+        videoSettings.hotWaterVideo = qsettings.value("video/hotwater_btn", "/usr/share/" + QString(PROJECT_NAME) + QString("/video/Idle.mp4") ).toString();
+        videoSettings.osmoseVideo = qsettings.value("video/osmose_btn", "/usr/share/" + QString(PROJECT_NAME) + QString("/video/Idle.mp4") ).toString();
+        videoSettings.pauseVideo = qsettings.value("video/pause_btn", "/usr/share/" + QString(PROJECT_NAME) + QString("/video/Idle.mp4") ).toString();
+        videoSettings.printVideo = qsettings.value("video/print_btn", "/usr/share/" + QString(PROJECT_NAME) + QString("/video/Idle.mp4") ).toString();
+        videoSettings.shampooVideo = qsettings.value("video/shampoo_btn", "/usr/share/" + QString(PROJECT_NAME) + QString("/video/Idle.mp4") ).toString();
+        videoSettings.waxVideo = qsettings.value("video/wax_btn", "/usr/share/" + QString(PROJECT_NAME) + QString("/video/Idle.mp4") ).toString();
+        videoSettings.idleVideo = qsettings.value("video/idle_btn", "/usr/share/" + QString(PROJECT_NAME) + QString("/video/Idle.mp4") ).toString();
+
 
 
         #ifdef DEVELOP_FLAGS
@@ -171,6 +183,21 @@ namespace awash {
         qsettings->setValue("qml/animation_steps", qmlSettings.animationSteps);
 
 		qsettings->setValue("codesys/gvl_file", codeSysSettings.gvlFile);
+
+
+
+
+		qsettings->setValue("video/active_clean_btn",  videoSettings.activeCleanVideo);
+		qsettings->setValue("video/coldwater_btn", videoSettings.coldWaterVideo);
+        qsettings->setValue("video/foam_btn", videoSettings.foamVideo);
+        qsettings->setValue("video/help_btn", videoSettings.helpVideo);
+		qsettings->setValue("video/hotwater_btn",  videoSettings.hotWaterVideo );
+		qsettings->setValue("video/osmose_btn", videoSettings.osmoseVideo );
+        qsettings->setValue("video/pause_btn", videoSettings.pauseVideo );
+        qsettings->setValue("video/print_btn", videoSettings.printVideo);
+        qsettings->setValue("video/shampoo_btn", videoSettings.shampooVideo );
+        qsettings->setValue("video/wax_btn", videoSettings.waxVideo);
+        qsettings->setValue("video/idle_btn", videoSettings.idleVideo);
 
 	};
 

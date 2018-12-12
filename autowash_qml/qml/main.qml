@@ -302,15 +302,6 @@ ApplicationWindow {
         anchors.bottom:variablesView.top
 
 
-        Image {
-            id: background
-            visible: true
-            source: "images/background.png"
-            x: 0
-            y: 0
-            opacity: 1
-        }
-
 
         VisCleanup {
            id: visCleanup

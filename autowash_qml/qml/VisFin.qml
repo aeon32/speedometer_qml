@@ -83,6 +83,15 @@ Item {
     ]
 
     Image {
+         id: background
+         visible: true
+         source: "images/background.png"
+         x: 0
+         y: 0
+         opacity: 1
+    }
+
+    Image {
         id: logo
         source: "images/logo_gradient.png"
         x: 812
