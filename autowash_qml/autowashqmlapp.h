@@ -13,7 +13,7 @@
 #include <QtQml/QQmlApplicationEngine>
 #include <QTimer>
 #include <QElapsedTimer>
-
+#include "settings/settings.h"
 
 
 class QCodesysNVSocket;
@@ -78,6 +78,8 @@ namespace awash {
 		void setQMLSettings(bool debugFlag, bool speedometerAnimation, int animationTime);
 
 		void setNewPostCounterFund(unsigned int newPostCounterFund);
+
+		void setVideoSettings (const Settings::VideoSettings & videoSettings);
 
 		QTimer testTimer;
 		QTimer timeOutTimer;

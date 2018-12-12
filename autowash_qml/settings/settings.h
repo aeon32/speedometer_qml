@@ -75,6 +75,18 @@ public:
         QString helpVideo;
         QString idleVideo;
 
+        QString realActiveCleanVideo;
+        QString realFoamVideo;
+        QString realShampooVideo;
+        QString realColdWaterVideo;
+        QString realHotWaterVideo;
+        QString realWaxVideo;
+        QString realOsmoseVideo;
+        QString realPauseVideo;
+        QString realPrintVideo;
+        QString realHelpVideo;
+        QString realIdleVideo;
+
     } videoSettings;
 
     //Функция возвращает режим работы программы (по результам парсинга командной строки)

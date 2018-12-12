@@ -331,6 +331,34 @@ void AutoWashQmlApp::setQMLSettings(bool debugFlag, bool animation, int animatio
 
 };
 
+void AutoWashQmlApp::setVideoSettings(const Settings::VideoSettings & videoSettings)
+{
+   QVariantMap videoFiles;
+
+   videoFiles.insert(QString ("activeCleanVideo"), videoSettings.realActiveCleanVideo);
+   videoFiles.insert(QString ("foamVideo"), videoSettings.realFoamVideo);
+   videoFiles.insert(QString ("shampooVideo"), videoSettings.realShampooVideo);
+
+   videoFiles.insert(QString ("coldWaterVideo"), videoSettings.realColdWaterVideo);
+   videoFiles.insert(QString ("hotWaterVideo"), videoSettings.realHotWaterVideo);
+   videoFiles.insert(QString ("waxVideo"), videoSettings.realWaxVideo);
+
+   videoFiles.insert(QString ("osmoseVideo"), videoSettings.realOsmoseVideo);
+   videoFiles.insert(QString ("pauseVideo"), videoSettings.realPauseVideo);
+   videoFiles.insert(QString ("printVideo"), videoSettings.realPrintVideo);
+
+   videoFiles.insert(QString ("helpVideo"), videoSettings.realHelpVideo);
+   videoFiles.insert(QString ("idleVideo"), videoSettings.realIdleVideo);
+
+   QVariant returnedValue;
+
+    QMetaObject::invokeMethod(qmlRoot, "setVideoFiles",
+                              Q_RETURN_ARG(QVariant, returnedValue),
+                              Q_ARG(QVariant, QJsonObject::fromVariantMap(videoFiles))
+    );
+
+}
+
 
 int AutoWashQmlApp::run()
 {
@@ -349,6 +377,8 @@ int AutoWashQmlApp::run()
     setPostMode(0);
     setQMLSettings(settings->qmlSettings.qmlDebug, settings->qmlSettings.speedometerAnimation,
                    settings->qmlSettings.animationTime);
+
+    setVideoSettings(settings->videoSettings);
 
 
 
@@ -409,7 +439,7 @@ void AutoWashQmlApp::on_testTimerTimeout()
 void AutoWashQmlApp::on_timeOutTimerTimeout()
 {
     const int STOP_MODE = 1000;
-    setPostMode(1000);
+    setPostMode(STOP_MODE);
 
 };
 

@@ -21,8 +21,8 @@ static const char * DEVELOP_QML_PATH = "${BINDIR}/../../autowash_qml/qml/main.qm
 static const char * DEVELOP_GVL_PATH = "${BINDIR}/../../autowash_qml/gvl/NVL2UI.gvl";  //путь к qml при разработке
 #endif
 
-static const char * DEFAULT_QML_PATH = "${SHARE_DIR}/${PROJECTNAME}/qml/main.qml";
-static const char * DEFAULT_GVL_PATH = "${SHARE_DIR}/${PROJECTNAME}/qml/NVL2UI.gvl";
+static const char * DEFAULT_QML_PATH = "${SHAREDIR}/${PROJECTNAME}/qml/main.qml";
+static const char * DEFAULT_GVL_PATH = "${SHAREDIR}/${PROJECTNAME}/qml/NVL2UI.gvl";
 
 };
 

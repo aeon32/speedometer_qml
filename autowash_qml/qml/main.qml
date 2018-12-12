@@ -67,6 +67,10 @@ ApplicationWindow {
 
     }
 
+    QMLElements.VideoFiles {
+        id: videoFiles
+    }
+
 
 
     QMLElements.NetVariables {
@@ -206,6 +210,12 @@ ApplicationWindow {
         variablesView.updateModel(valueSource.variableList)
 
      }
+
+    function setVideoFiles(videoFiles) {
+        videoFiles.variableList = videoFiles;
+        variablesView.updateModel(videoFiles.variableList)
+
+     }     
 
     function setQmlSettings(debugFlag, speedometerAnimation, animationTime) {
         variablesView.visible = debugFlag;
@@ -379,7 +389,7 @@ ApplicationWindow {
 
      Component {
          id: myDelegate
-         Text {text : varName +": " +varValue; font.pixelSize: 9}
+         Text {text : varName +": " +varValue; font.pixelSize: 9; color : "red";}
      }
 
      ListView {
@@ -390,14 +400,15 @@ ApplicationWindow {
          anchors.bottom: parent.bottom
          anchors.right:parent.right
 
-         visible : false;
+         visible : false
+
 
          model : ListModel {id: model}
          delegate: myDelegate
          function updateModel(variableList) {
              model.clear()
              for (var key in variableList) {
-                 model.append({varName: key, varValue:variableList[key]})
+                 model.append({varName: key, varValue: String(variableList[key]) })
 
              }
 
