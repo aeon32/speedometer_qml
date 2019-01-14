@@ -16,38 +16,44 @@
 #include <QSettings>
 
 
-namespace awash {
+namespace awash
+{
 
-class Settings {
+class Settings
+{
 
 public:
-    enum RunMode {          //режим работы приложения
+    enum RunMode            //режим работы приложения
+    {
         ARGS_PARSE_ERROR,    //произошла ошибка при разборе аргументов командной строки
         ARGS_WORK,          //штатный режим работы
         ARGS_SHOW_VERSION,  //показать версию программы
         ARGS_SHOW_RELEASE,  //показать версию релиза
-		ARGS_SHOW_HELP,    //показать помощь
+        ARGS_SHOW_HELP,    //показать помощь
         ARGS_TEST          //тестирование
     };
 private:
     RunMode runMode;
 public:
-	struct LoggerSettings {
-		QString fileLogName;
-		QString realFileLogName;
-		QString prefix;
-		int logLevel;
-		int fileLogLevel;
-	} loggerSettings;
+    struct LoggerSettings
+    {
+        QString fileLogName;
+        QString realFileLogName;
+        QString prefix;
+        int logLevel;
+        int fileLogLevel;
+    } loggerSettings;
 
-	struct ListeningSettings {
-		QString host;
-		unsigned int port;
-		unsigned int cob_id;
+    struct ListeningSettings
+    {
+        QString host;
+        unsigned int port;
+        unsigned int cob_id;
 
-	} listeningSettings;
+    } listeningSettings;
 
-	struct QMLSettings {
+    struct QMLSettings
+    {
         QString qmlFile;
         QString realQmlFile;
         bool qmlDebug;
@@ -55,14 +61,16 @@ public:
         bool speedometerAnimation;
         unsigned int animationTime;
         unsigned int animationSteps;
-	} qmlSettings;
+    } qmlSettings;
 
-    struct CodeSysSettings {
+    struct CodeSysSettings
+    {
         QString gvlFile;
         QString realGvlFile;
     } codeSysSettings;
 
-    struct VideoSettings {
+    struct VideoSettings
+    {
         QString activeCleanVideo;
         QString foamVideo;
         QString shampooVideo;
@@ -71,8 +79,6 @@ public:
         QString waxVideo;
         QString osmoseVideo;
         QString pauseVideo;
-        QString printVideo;
-        QString helpVideo;
         QString idleVideo;
 
         QString realActiveCleanVideo;
@@ -82,15 +88,16 @@ public:
         QString realHotWaterVideo;
         QString realWaxVideo;
         QString realOsmoseVideo;
-        QString realPauseVideo;
-        QString realPrintVideo;
-        QString realHelpVideo;
         QString realIdleVideo;
+        QString realPauseVideo;
 
     } videoSettings;
 
     //Функция возвращает режим работы программы (по результам парсинга командной строки)
-    inline RunMode getRunMode() const {return runMode; } ;
+    inline RunMode getRunMode() const
+    {
+        return runMode;
+    } ;
     //Функция возвращает командострочную справку
     QString getHelpMessage() const;
     //Функция возвращает строку об ошибке
@@ -112,9 +119,9 @@ private:
 
     QString parseCommandString(int argc, const char * const * argv, const QString & defaultConfFile);
 
-	void load();
+    void load();
 
-	void save(QSettings * qsettings);
+    void save(QSettings * qsettings);
 public:
     Settings(int argc, const char * const *argv);
 };

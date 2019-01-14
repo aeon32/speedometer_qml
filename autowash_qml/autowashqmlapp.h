@@ -19,81 +19,83 @@
 class QCodesysNVSocket;
 class QCodesysNVTelegram;
 
-namespace awash {
-	class Settings;
+namespace awash
+{
+class Settings;
 
-	class AutoWashQmlApp :public QApplication {
-		Q_OBJECT
-	public:
-
-
-		AutoWashQmlApp(int argc, char **argv);
-		virtual ~AutoWashQmlApp();
-
-		int exec();
+class AutoWashQmlApp :public QApplication
+{
+    Q_OBJECT
+public:
 
 
+    AutoWashQmlApp(int argc, char **argv);
+    virtual ~AutoWashQmlApp();
 
-		static AutoWashQmlApp * getApp();
-
-		//    QRunnbale * initializationResourcesProcess();
-
-
-	private:
-		AutoWashQmlApp(const AutoWashQmlApp &);
-		AutoWashQmlApp & operator = (const AutoWashQmlApp &);
-
-		QQmlApplicationEngine * engine;
-		Settings * settings;
-
-		//socket and telegrams
-		QCodesysNVSocket *socket;
-		QCodesysNVTelegram *receivableTelegram;
-
-		void setupLogger();
-		int argC;
-		const char * argV;
-		QObject * qmlRoot;
-
-		int oldButtonActive;
+    int exec();
 
 
-		unsigned int testMoneyIndexValue;
-		unsigned int lastPostCounterFund;
+
+    static AutoWashQmlApp * getApp();
+
+    //    QRunnbale * initializationResourcesProcess();
 
 
-        QStringList netVariableNames;
+private:
+    AutoWashQmlApp(const AutoWashQmlApp &);
+    AutoWashQmlApp & operator = (const AutoWashQmlApp &);
+
+    QQmlApplicationEngine * engine;
+    Settings * settings;
+
+    //socket and telegrams
+    QCodesysNVSocket *socket;
+    QCodesysNVTelegram *receivableTelegram;
+
+    void setupLogger();
+    int argC;
+    const char * argV;
+    QObject * qmlRoot;
+
+    int oldButtonActive;
 
 
-		bool resourceInitialization();
+    unsigned int testMoneyIndexValue;
+    unsigned int lastPostCounterFund;
 
-		static AutoWashQmlApp * app;
 
-		int run();
+    QStringList netVariableNames;
 
-		void setPostMode(unsigned int mode);
 
-		void setScreen (unsigned int screen);
+    bool resourceInitialization();
 
-		void setQMLSettings(bool debugFlag, bool speedometerAnimation, int animationTime);
+    static AutoWashQmlApp * app;
 
-		void setNewPostCounterFund(unsigned int newPostCounterFund);
+    int run();
 
-		void setVideoSettings (const Settings::VideoSettings & videoSettings);
+    void setPostMode(unsigned int mode);
 
-		QTimer testTimer;
-		QTimer timeOutTimer;
+    void setScreen (unsigned int screen);
 
-	private slots:
-		void on_codesysTelegramReceived(QString IP, unsigned int port, unsigned int bytes, unsigned int cobid);
-		void on_dataAvailable();
+    void setQMLSettings(bool debugFlag, bool speedometerAnimation, int animationTime);
 
-		void on_testTimerTimeout();
+    void setNewPostCounterFund(unsigned int newPostCounterFund);
 
-		void on_initializationError();
+    void setVideoSettings (const Settings::VideoSettings & videoSettings);
 
-		void on_timeOutTimerTimeout();
-	};
+    QTimer testTimer;
+    QTimer timeOutTimer;
+
+private slots:
+    void on_codesysTelegramReceived(QString IP, unsigned int port, unsigned int bytes, unsigned int cobid);
+    void on_dataAvailable();
+
+    void on_testTimerTimeout();
+
+    void on_initializationError();
+
+    void on_timeOutTimerTimeout();
+};
 
 };
 

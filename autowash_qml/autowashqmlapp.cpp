@@ -333,29 +333,25 @@ void AutoWashQmlApp::setQMLSettings(bool debugFlag, bool animation, int animatio
 
 void AutoWashQmlApp::setVideoSettings(const Settings::VideoSettings & videoSettings)
 {
-   QVariantMap videoFiles;
+    QVariantMap videoFiles;
 
-   videoFiles.insert(QString ("activeCleanVideo"), videoSettings.realActiveCleanVideo);
-   videoFiles.insert(QString ("foamVideo"), videoSettings.realFoamVideo);
-   videoFiles.insert(QString ("shampooVideo"), videoSettings.realShampooVideo);
+    videoFiles.insert(QString ("activeCleanVideo"), videoSettings.realActiveCleanVideo);
+    videoFiles.insert(QString ("foamVideo"), videoSettings.realFoamVideo);
+    videoFiles.insert(QString ("shampooVideo"), videoSettings.realShampooVideo);
 
-   videoFiles.insert(QString ("coldWaterVideo"), videoSettings.realColdWaterVideo);
-   videoFiles.insert(QString ("hotWaterVideo"), videoSettings.realHotWaterVideo);
-   videoFiles.insert(QString ("waxVideo"), videoSettings.realWaxVideo);
+    videoFiles.insert(QString ("coldWaterVideo"), videoSettings.realColdWaterVideo);
+    videoFiles.insert(QString ("hotWaterVideo"), videoSettings.realHotWaterVideo);
+    videoFiles.insert(QString ("waxVideo"), videoSettings.realWaxVideo);
 
-   videoFiles.insert(QString ("osmoseVideo"), videoSettings.realOsmoseVideo);
-   videoFiles.insert(QString ("pauseVideo"), videoSettings.realPauseVideo);
-   videoFiles.insert(QString ("printVideo"), videoSettings.realPrintVideo);
+    videoFiles.insert(QString ("osmoseVideo"), videoSettings.realOsmoseVideo);
+    videoFiles.insert(QString ("idleVideo"), videoSettings.realIdleVideo);
 
-   videoFiles.insert(QString ("helpVideo"), videoSettings.realHelpVideo);
-   videoFiles.insert(QString ("idleVideo"), videoSettings.realIdleVideo);
-
-   QVariant returnedValue;
+    QVariant returnedValue;
 
     QMetaObject::invokeMethod(qmlRoot, "setVideoFiles",
                               Q_RETURN_ARG(QVariant, returnedValue),
                               Q_ARG(QVariant, QJsonObject::fromVariantMap(videoFiles))
-    );
+                             );
 
 }
 

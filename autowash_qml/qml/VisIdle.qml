@@ -11,7 +11,7 @@ Item {
 
     MediaPlayer {
         id: mediaPlayer
-        autoPlay: true
+        autoPlay: false
         autoLoad: true
         loops:MediaPlayer.Infinite
         source:"/usr/share/autowash_qml/video/Idle.mp4"
@@ -22,5 +22,16 @@ Item {
         source:mediaPlayer
         anchors.fill: parent
     }
+
+    onVisibleChanged:
+    {
+        if (visible)
+            mediaPlayer.play()
+        else
+            mediaPlayer.stop()
+    }
+
+
+
 
 }

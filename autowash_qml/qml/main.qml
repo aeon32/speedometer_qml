@@ -61,6 +61,31 @@ ApplicationWindow {
 
     }
 
+    Action {
+       id: funcAction
+       shortcut: "Shift+Q"
+       onTriggered: {valueSource.postMode = 0;}// Func mode
+    }
+
+    Action {
+       id: shampooAction
+       shortcut: "Shift+S"
+       onTriggered: {valueSource.postMode = 3;}
+
+    }
+    Action {
+       id: foamAction
+       shortcut: "Shift+F"
+       onTriggered: {valueSource.postMode = 2;}
+
+    }
+
+    Action {
+       id: idleAction
+       shortcut: "Shift+I"
+       onTriggered: {valueSource.postMode = 9;}
+    }
+
 
     FontsCollections {
         id: myFonts
@@ -69,12 +94,14 @@ ApplicationWindow {
 
     QMLElements.VideoFiles {
         id: videoFiles
+        variableList : []
     }
 
 
 
     QMLElements.NetVariables {
         id: valueSource
+        variableList : []
         onPostModeChanged: {
 
 
@@ -101,40 +128,48 @@ ApplicationWindow {
                 // 	FREEMONEY	:= 800	// Экран добавления денег
                 // 	STOP		:= 1000	// Экран состояния останова поста
                 case 0 :
-                        modeView.state = "FUNC";
+                        modeView.mode = "FUNC";
                 break;
                 case 1 :
-                        modeView.state = "FUNC";
+                        modeView.mode = "FUNC";
+                        modeView.playOneShotVideo(videoFiles.activeCleanVideo);
                 break;
                 case 2 :
-                        modeView.state = "FUNC";
+                        modeView.mode = "FUNC";
+                        modeView.playOneShotVideo(videoFiles.foamVideo);
                 break;
                 case 3 :
-                        modeView.state = "FUNC";
+                        modeView.mode = "FUNC";
+                        modeView.playOneShotVideo(videoFiles.shampooVideo);
                 break;
                 case 4 :
-                        modeView.state = "FUNC";
+                        modeView.mode = "FUNC";
+                        modeView.playOneShotVideo(videoFiles.coldWaterVideo);
                 break;
                 case 5 :
-                        modeView.state = "FUNC";
+                        modeView.mode = "FUNC";
+                        modeView.playOneShotVideo(videoFiles.hotWaterVideo);
                 break;
                 case 6 :
-                        modeView.state = "FUNC";
+                        modeView.mode = "FUNC";
+                        modeView.playOneShotVideo(videoFiles.waxVideo);
                 break;
                 case 7 :
-                        modeView.state = "FUNC";
+                        modeView.mode = "FUNC";
+                        modeView.playOneShotVideo(videoFiles.osmoseVideo);
                 break;
                 case 8 :
-                        modeView.state = "FUNC";
+                        modeView.mode = "FUNC";
+                        modeView.playOneShotVideo(videoFiles.pauseVideo);
                 break;
-                case 9 : modeView.state = "IDLE"; break;
-                case 10 : modeView.state = "ADVERT"; break;
-                case 500 : modeView.state = "FIN"; break;
-                case 600 : modeView.state = "CLEANUP"; break;
-                case 700 : modeView.state = "CASHCOLLECT"; break;
-                case 710 : modeView.state = "CASHCOLLECT_FIN"; break;
-                case 800 : modeView.state = "FREEMONEY"; break;
-                case 1000 : modeView.state = "STOP"; break;
+                case 9 : modeView.mode = "IDLE"; break;
+                case 10 : modeView.mode = "ADVERT"; break;
+                case 500 : modeView.mode = "FIN"; break;
+                case 600 : modeView.mode = "CLEANUP"; break;
+                case 700 : modeView.mode = "CASHCOLLECT"; break;
+                case 710 : modeView.mode = "CASHCOLLECT_FIN"; break;
+                case 800 : modeView.mode = "FREEMONEY"; break;
+                case 1000 : modeView.mode = "STOP"; break;
                 default:
                     modeView.state = "FUNC";
 
@@ -206,13 +241,14 @@ ApplicationWindow {
 
 
     function setVariables(variables) {
+
         valueSource.variableList = variables;
         variablesView.updateModel(valueSource.variableList)
 
      }
 
-    function setVideoFiles(videoFiles) {
-        videoFiles.variableList = videoFiles;
+    function setVideoFiles(videoFileNames) {
+        videoFiles.variableList = videoFileNames;
         variablesView.updateModel(videoFiles.variableList)
 
      }     
@@ -228,105 +264,58 @@ ApplicationWindow {
 
         property string buttonState: "NONE";
 
+        property string mode : "FUNC";
 
-        state: "FUNC";
-        states : [
-            State {
-                name : "CLEANUP"
-                PropertyChanges {
-                    target: visCleanup
-                    visible : true
-                    restoreEntryValues: true
-                }
-            },
-            State {
-                name : "CASHCOLLECT"
-                PropertyChanges {
-                    target: visCashCollect
-                    visible : true
-                    restoreEntryValues: true
-                }
-            },
-            State {
-                name : "CASHCOLLECT_FIN"
-                PropertyChanges {
-                    target: visCashCollectFin
-                    visible : true
-                    restoreEntryValues: true
-                }
-            },
-            State {
-                name : "FREEMONEY"
-                PropertyChanges {
-                    target: visFreeMoney
-                    visible : true
-                    restoreEntryValues: true
-                }
-            },
-            State {
-                name : "ADVERT"
-                PropertyChanges {
-                    target: visAdvert
-                    visible : true
-                    restoreEntryValues: true
-                }
-            },
-            State {
-                name : "STOP"
-                PropertyChanges {
-                    target: visStop
-                    visible : true
-                    restoreEntryValues: true
-                }
-            },
-            State {
-                name : "FUNC"
-                PropertyChanges {
-                    target: visFunc
-                    visible : true
-                    restoreEntryValues: true
-                }
-            },
-            State {
-                name : "FIN"
-                PropertyChanges {
-                    target: visFin
-                    visible : true
-                    restoreEntryValues: true
-                }
-            },
-            State {
-                name : "IDLE"
-                PropertyChanges {
-                    target: visIdle
-                    visible : true
-                    restoreEntryValues: true
-                }
-            }
+        property bool playingOneShotVideo : false;
 
-        ]
+
+
 
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right:parent.right
         anchors.bottom:variablesView.top
 
+        function playOneShotVideo(videoFile)
+        {
+            visVideo.videoFile = videoFile;
+            playingOneShotVideo = true;
+            visVideo.play()
+
+        }
+
+        function oneShotVideoStopped()
+        {
+            playingOneShotVideo = false
+
+        }
+
 
 
         VisCleanup {
            id: visCleanup
-           visible: false
+           visible: parent.mode == "CLEANUP"
            anchors.fill: parent
            fonts: myFonts
            state:parent.buttonState
+        }
 
-
+        VisVideo 
+        {
+           id:visVideo
+           anchors.fill: parent
+           visible:  parent.playingOneShotVideo
+           onVideoStopped:
+           {
+               console.log("video stopped")
+               parent.oneShotVideoStopped()
+           }
 
         }
 
         VisCashCollect {
            id: visCashCollect
-           visible: false
+           visible: parent.mode == "CASHCOLLECT" && !parent.playingOneShotVideo
            anchors.fill: parent
            fonts : myFonts
            state:parent.buttonState
@@ -335,13 +324,13 @@ ApplicationWindow {
 
         VisCashCollectFin {
            id: visCashCollectFin
-           visible: false
+           visible: parent.mode == "CASHCOLLECT_FIN" && !parent.playingOneShotVideo
            anchors.fill: parent
         }
 
         VisFreeMoney {
             id: visFreeMoney
-            visible: false
+            visible: parent.mode == "FREEMONEY"  && !parent.playingOneShotVideo
             anchors.fill: parent
             state:parent.buttonState
             fonts: myFonts
@@ -349,14 +338,14 @@ ApplicationWindow {
 
         VisStop {
             id :visStop
-            visible: false
+            visible: parent.mode == "STOP"  && !parent.playingOneShotVideo
             anchors.fill: parent
 
         }
 
         VisFunc {
             id: visFunc
-            visible: false
+            visible: parent.mode == "FUNC"  && !parent.playingOneShotVideo
             anchors.fill: parent
             fonts: myFonts
             state:parent.buttonState
@@ -365,13 +354,13 @@ ApplicationWindow {
         }
         VisAdvert {
             id: visAdvert
-            visible: false
+            visible: parent.mode == "ADVERT"  && !parent.playingOneShotVideo
             anchors.fill: parent
         }
 
         VisFin {
             id: visFin
-            visible: false
+            visible: parent.mode == "FIN"  && !parent.playingOneShotVideo
             anchors.fill: parent
             fonts: myFonts
             state:parent.buttonState
@@ -379,7 +368,7 @@ ApplicationWindow {
 
         VisIdle {
             id : visIdle
-            visible: false
+            visible: parent.mode == "IDLE"  && !parent.playingOneShotVideo
             anchors.fill: parent
         }
 

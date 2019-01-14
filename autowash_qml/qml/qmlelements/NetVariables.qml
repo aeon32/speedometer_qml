@@ -147,7 +147,6 @@ Item {
         property var variableList;
 
         onVariableListChanged: {
-
             for (var varName in variableList) {
                 if (varName in valueSource) {
 

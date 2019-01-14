@@ -9,14 +9,15 @@
 #include <locale.h>
 #include "autowashqmlapp.h"
 
-int main(int argc, char **argv) {
-	::setlocale(LC_ALL, PROJECT_WORKING_LOCALE);
-	//QTextCodec::setCodecForTr(QTextCodec::codecForName(PROJECT_WORKING_CHARSET));
-	//QTextCodec::setCodecForCStrings(QTextCodec::codecForName(PROJECT_WORKING_CHARSET));
+int main(int argc, char **argv)
+{
+    ::setlocale(LC_ALL, PROJECT_WORKING_LOCALE);
+    //QTextCodec::setCodecForTr(QTextCodec::codecForName(PROJECT_WORKING_CHARSET));
+    //QTextCodec::setCodecForCStrings(QTextCodec::codecForName(PROJECT_WORKING_CHARSET));
 
 
-	//QTextCodec::setCodecForLocale(QTextCodec::codecForName("KOI8-R"));
+    //QTextCodec::setCodecForLocale(QTextCodec::codecForName("KOI8-R"));
 
-	//главная процедура. Создаём и запускаем приложение
-	return(awash::AutoWashQmlApp(argc, argv).exec());
+    //главная процедура. Создаём и запускаем приложение
+    return(awash::AutoWashQmlApp(argc, argv).exec());
 }

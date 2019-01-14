@@ -144,16 +144,14 @@ namespace awash {
 
         codeSysSettings.gvlFile = qsettings.value("codesys/gvl_file", "${MEDIADIR}"+ QString("/gvl/NVL2UI.gvl")).toString();
 
-        videoSettings.activeCleanVideo = qsettings.value("video/active_clean_btn", "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
-        videoSettings.coldWaterVideo = qsettings.value("video/coldwater_btn", "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
-        videoSettings.foamVideo = qsettings.value("video/foam_btn", "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
-        videoSettings.helpVideo = qsettings.value("video/help_btn",  "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
-        videoSettings.hotWaterVideo = qsettings.value("video/hotwater_btn", "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
-        videoSettings.osmoseVideo = qsettings.value("video/osmose_btn", "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
-        videoSettings.pauseVideo = qsettings.value("video/pause_btn", "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
-        videoSettings.printVideo = qsettings.value("video/print_btn", "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
-        videoSettings.shampooVideo = qsettings.value("video/shampoo_btn", "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
-        videoSettings.waxVideo = qsettings.value("video/wax_btn", "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
+        videoSettings.activeCleanVideo = qsettings.value("video/active_clean", "${MEDIADIR}" + QString("/video/active_clean.mp4") ).toString();
+        videoSettings.coldWaterVideo = qsettings.value("video/coldwater", "${MEDIADIR}" + QString("/video/coldwater.mp4") ).toString();
+        videoSettings.foamVideo = qsettings.value("video/foam", "${MEDIADIR}" + QString("/video/foam.mp4") ).toString();
+        videoSettings.hotWaterVideo = qsettings.value("video/hotwater", "${MEDIADIR}" + QString("/video/hotwater.mp4") ).toString();
+        videoSettings.osmoseVideo = qsettings.value("video/osmose", "${MEDIADIR}" + QString("/video/osmose.mp4") ).toString();
+        videoSettings.pauseVideo = qsettings.value("video/pause", "${MEDIADIR}" + QString("/video/pause.mp4") ).toString();
+        videoSettings.shampooVideo = qsettings.value("video/shampoo", "${MEDIADIR}" + QString("/video/shampoo.mp4") ).toString();
+        videoSettings.waxVideo = qsettings.value("video/wax", "${MEDIADIR}" + QString("/video/wax.mp4") ).toString();
         videoSettings.idleVideo = qsettings.value("video/idle", "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
 
         qmlSettings.realQmlFile = processSpecialDirs(qmlSettings.qmlFile);
@@ -166,10 +164,8 @@ namespace awash {
         videoSettings.realHotWaterVideo = processSpecialDirs( videoSettings.hotWaterVideo);
         videoSettings.realWaxVideo = processSpecialDirs( videoSettings.waxVideo);
         videoSettings.realOsmoseVideo = processSpecialDirs( videoSettings.osmoseVideo);
-        videoSettings.realPauseVideo = processSpecialDirs( videoSettings.pauseVideo);
-        videoSettings.realPrintVideo = processSpecialDirs( videoSettings.printVideo);
-        videoSettings.realHelpVideo = processSpecialDirs( videoSettings.helpVideo);
         videoSettings.realIdleVideo = processSpecialDirs( videoSettings.idleVideo);
+        videoSettings.realPauseVideo = processSpecialDirs( videoSettings.pauseVideo);
 
 
 
@@ -205,17 +201,15 @@ namespace awash {
 
 
 
-		qsettings->setValue("video/active_clean_btn",  videoSettings.activeCleanVideo);
-		qsettings->setValue("video/coldwater_btn", videoSettings.coldWaterVideo);
-        qsettings->setValue("video/foam_btn", videoSettings.foamVideo);
-        qsettings->setValue("video/help_btn", videoSettings.helpVideo);
-		qsettings->setValue("video/hotwater_btn",  videoSettings.hotWaterVideo );
-		qsettings->setValue("video/osmose_btn", videoSettings.osmoseVideo );
-        qsettings->setValue("video/pause_btn", videoSettings.pauseVideo );
-        qsettings->setValue("video/print_btn", videoSettings.printVideo);
-        qsettings->setValue("video/shampoo_btn", videoSettings.shampooVideo );
-        qsettings->setValue("video/wax_btn", videoSettings.waxVideo);
+		qsettings->setValue("video/active_clean",  videoSettings.activeCleanVideo);
+		qsettings->setValue("video/coldwater", videoSettings.coldWaterVideo);
+        qsettings->setValue("video/foam", videoSettings.foamVideo);
+		qsettings->setValue("video/hotwater",  videoSettings.hotWaterVideo );
+		qsettings->setValue("video/osmose", videoSettings.osmoseVideo );
+        qsettings->setValue("video/shampoo", videoSettings.shampooVideo );
+        qsettings->setValue("video/wax", videoSettings.waxVideo);
         qsettings->setValue("video/idle", videoSettings.idleVideo);
+        qsettings->setValue("video/pause", videoSettings.pauseVideo);
 
 	};
 

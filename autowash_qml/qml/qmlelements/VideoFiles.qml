@@ -58,15 +58,13 @@ Item {
     property string helpVideo;
     property string idleVideo;
 
- 
+
 
     property var variableList;
 
     onVariableListChanged: {
-
         for (var varName in variableList) {
-            if (varName in valueSource) {
-
+            if (varName in videoFiles) {
                 videoFiles[varName] = variableList[varName];
             };
         }
