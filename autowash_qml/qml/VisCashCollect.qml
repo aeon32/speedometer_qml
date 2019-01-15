@@ -5,8 +5,8 @@ Item {
 
     property FontsCollections fonts
 
-    width: 1280
-    height: 1024
+    //width: 1280
+    //height: 1024
 
     states: [
 

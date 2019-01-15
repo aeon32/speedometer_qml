@@ -8,13 +8,14 @@ Item {
     id: item
     width:1280
     height:1024
+    property string videoFile: ""
 
     MediaPlayer {
         id: mediaPlayer
         autoPlay: false
         autoLoad: true
         loops:MediaPlayer.Infinite
-        source:"/usr/share/autowash_qml/video/Idle.mp4"
+        source: item.videoFile
     }
 
     VideoOutput {

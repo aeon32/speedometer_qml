@@ -49,8 +49,8 @@ import "./qmlelements" as QMLElements
 ApplicationWindow {
     id: root
     visible: true
-    height: 1024
-    width: 1280
+    //height: 1024
+    //width: 1280
     title: "CarWashEco"
     visibility: Window.FullScreen
 
@@ -368,6 +368,7 @@ ApplicationWindow {
 
         VisIdle {
             id : visIdle
+            videoFile:videoFiles.idleVideo
             visible: parent.mode == "IDLE"  && !parent.playingOneShotVideo
             anchors.fill: parent
         }
