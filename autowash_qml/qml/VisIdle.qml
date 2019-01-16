@@ -22,6 +22,7 @@ Item {
         id:videoOutput
         source:mediaPlayer
         anchors.fill: parent
+        fillMode : VideoOutput.PreserveAspectCrop
     }
 
     onVisibleChanged:

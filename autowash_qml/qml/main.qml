@@ -384,7 +384,7 @@ ApplicationWindow {
 
      ListView {
          id : variablesView
-         height:200
+         height: visible ? 200 : 0
 
          anchors.left: parent.left
          anchors.bottom: parent.bottom
