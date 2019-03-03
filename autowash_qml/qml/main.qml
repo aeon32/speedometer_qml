@@ -86,6 +86,11 @@ ApplicationWindow {
        onTriggered: {valueSource.postMode = 9;}
     }
 
+    Action {
+       id: pauseAction
+       shortcut: "Shift+P"
+       onTriggered: {valueSource.postMode = 8;}
+    }
 
     FontsCollections {
         id: myFonts

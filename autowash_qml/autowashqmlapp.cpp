@@ -345,6 +345,7 @@ void AutoWashQmlApp::setVideoSettings(const Settings::VideoSettings & videoSetti
 
     videoFiles.insert(QString ("osmoseVideo"), videoSettings.realOsmoseVideo);
     videoFiles.insert(QString ("idleVideo"), videoSettings.realIdleVideo);
+    videoFiles.insert(QString ("pauseVideo"), videoSettings.realPauseVideo);
 
     QVariant returnedValue;
 
