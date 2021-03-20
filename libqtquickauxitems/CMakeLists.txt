@@ -1,0 +1,66 @@
+# -*- coding:utf-8 -*-
+# -*- кодировка:utf-8 -*-
+
+SET (SUBPROJECT qtquickauxitems)
+PROJECT (${SUBPROJECT})
+
+
+
+FIND_PACKAGE(Qt5Core)
+
+IF (NOT Qt5Core_FOUND)
+  MESSAGE(FATAL_ERROR "Qt5 core not found" )
+ENDIF (NOT Qt5Core_FOUND)
+
+
+
+
+SET(MOC_HEADERS
+    qtquickqrcode.h
+   
+)
+SET (HEADERS 
+
+
+)
+
+SET (SOURCES
+    qtquickqrcode.cpp
+
+)
+
+
+
+SET (GENERATED_SOURCES 
+    ${BUILDINFO_H} ${BUILDINFO_CPP}
+)
+
+QT5_WRAP_CPP(MOC_SOURCES ${MOC_HEADERS})
+
+SOURCE_GROUP ("Header Files" FILES ${HEADERS})
+SOURCE_GROUP ("Source Files" FILES ${SOURCES})
+SOURCE_GROUP ("Generated Files" FILES ${MOC_SOURCES})
+
+IF (develop_flags)
+    ADD_DEFINITIONS(-DDEVELOP_FLAGS=1)
+ENDIF(develop_flags)
+
+
+ADD_LIBRARY(${SUBPROJECT} STATIC  ${HEADERS} ${SOURCES}  ${MOC_HEADERS}  ${MOC_SOURCES} )
+TARGET_INCLUDE_DIRECTORIES(${SUBPROJECT}  PUBLIC  ${FULL_SOURCE_DIR})
+
+
+
+
+Qt5_USE_MODULES(${SUBPROJECT} Core )
+TARGET_COMPILE_DEFINITIONS(${SUBPROJECT} PUBLIC -DUSE_QT4=1)
+                 
+
+
+IF (WIN32)
+	#INCLUDE(GenerateExportHeader) 
+	#GENERATE_EXPORT_HEADER(${SUBPROJECT})
+
+ENDIF(WIN32)
+
+

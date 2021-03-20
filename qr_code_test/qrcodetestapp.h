@@ -10,6 +10,7 @@
 #define QRCodeTestApp_H
 
 #include <QApplication>
+#include <QtQml/QQmlApplicationEngine>
 
 namespace qrcodetest {
 	class MainWindow;
@@ -36,8 +37,10 @@ namespace qrcodetest {
 		QRCodeTestApp(const QRCodeTestApp &);
 		QRCodeTestApp & operator = (const QRCodeTestApp &);
 
-		MainWindow * mainWindow;
 		Settings * settings;
+
+		QQmlApplicationEngine * engine;
+		QObject * qmlRoot;
 
 
 		void setupLogger();

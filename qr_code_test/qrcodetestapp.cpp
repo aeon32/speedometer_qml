@@ -9,11 +9,11 @@
 #include <libeom/logger/logger.h>
 #include <libeom/stringutils/stringutils.h>
 
-
+#include "settings/settings.h"
 
 #include <locale>
 #include "localconfig.h"
-#include "mainwindow.h"
+
 
 namespace qrcodetest{
 
@@ -29,11 +29,13 @@ const char * PROGNAME = PROJECT_NAME;
 **
 ******************************************************************************/
 
-QRCodeTestApp::QRCodeTestApp(int argc, char **argv):QApplication(argc, argv), argC(argc), argV(argV), mainWindow(NULL)  {
+QRCodeTestApp::QRCodeTestApp(int argc, char **argv):QApplication(argc, argv), argC(argc), argV(argV), engine(NULL)  {
 
     app = this;
 
 
+
+    settings = new Settings(argc, argv);
 
     setQuitOnLastWindowClosed(false);
 
@@ -43,12 +45,12 @@ QRCodeTestApp::QRCodeTestApp(int argc, char **argv):QApplication(argc, argv), ar
 
 QRCodeTestApp::~QRCodeTestApp() {
 
-    //settings->saveSettings();
+    if (engine)
+        delete engine;
 
 
+    delete settings;
 
-    if (mainWindow)
-        delete mainWindow;
 
 
 
@@ -96,8 +98,16 @@ bool QRCodeTestApp::resourceInitialization() {
 };
 
 int QRCodeTestApp::run() {
-	mainWindow = new MainWindow();
-	mainWindow->show();
+
+    engine = new QQmlApplicationEngine(settings->qmlSettings.realQmlFile, this);
+    if (engine->rootObjects().isEmpty())
+        return -1;
+
+    qmlRoot = engine->rootObjects().first();
+    if (!qmlRoot)
+        return -1;
+
+
 
 	int res = QApplication::exec();
 	return res;
