@@ -2,7 +2,7 @@
 #define QTQUICKQRCODE_H
 
 #include <QtQuick/QQuickPaintedItem>
-#include <QColor>
+ #include <QColor>
 #include <QBrush>
 #include <QPen>
 #include <QPainter>
@@ -12,39 +12,35 @@ class QtQuickQRCode : public QQuickPaintedItem
 {
     Q_OBJECT
     Q_PROPERTY(QString qrString READ qrString WRITE setQRString NOTIFY qrStringChanged)
+    Q_PROPERTY(QColor backgroundColor READ backgroundColor WRITE setBackgroundColor NOTIFY backgroundColorChanged)
 
 public:
-    explicit ClockCircle(QQuickItem *parent = 0);
+    explicit QtQuickQRCode (QQuickItem *parent = 0);
 
-    void paint(QPainter *painter) override; // Переопределяем метод, в котором будет отрисовываться наш объект
+    void paint(QPainter *painter) override;
 
     QString qrString() const;
+    QColor backgroundColor() const;
 
 public slots:
-    void setQRString(const QString name);
+    void setQRString(const QString qrString);
     void setBackgroundColor(const QColor backgroundColor);
-    void setBorderActiveColor(const QColor borderActiveColor);
-    void setBorderNonActiveColor(const QColor borderNonActiveColor);
-    void setAngle(const qreal angle);
-    void setCircleTime(const QTime circleTime);
+
 
 signals:
-    void cleared();
-
-    void nameChanged(const QString name);
+    void qrStringChanged(const QString qrString);
     void backgroundColorChanged(const QColor backgroundColor);
-    void borderActiveColorChanged(const QColor borderActiveColor);
-    void borderNonActiveColorChanged(const QColor borderNonActiveColor);
-    void angleChanged(const qreal angle);
-    void circleTimeChanged(const QTime circleTime);
+
 
 private:
-    QString     m_name;                 // Название объекта, по большей части до кучи добавлено
-    QColor      m_backgroundColor;      // Основной цвет фона
-    QColor      m_borderActiveColor;    // Цвет ободка, заполняющий при прогрессе ободок таймера
-    QColor      m_borderNonActiveColor; // Цвет ободка фоновый
-    qreal       m_angle;                // Угол поворота графика типа пирог, будет формировать прогресс на ободке
-    QTime       m_circleTime;           // Текущее время таймера
+    QString     m_qrString;
+    QColor m_backgroundColor;
 
-    QTimer      *internalTimer;         // Таймер, по которому будет изменяться время
+    QPixmap m_qrPixmap;
+
+
+    void updateQRPixmap();
 };
+
+
+#endif

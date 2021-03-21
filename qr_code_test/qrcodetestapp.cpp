@@ -8,11 +8,14 @@
 
 #include <libeom/logger/logger.h>
 #include <libeom/stringutils/stringutils.h>
+#include <libqtquickauxitems/qtquickqrcode.h>
 
 #include "settings/settings.h"
 
 #include <locale>
 #include "localconfig.h"
+
+
 
 
 namespace qrcodetest{
@@ -98,6 +101,9 @@ bool QRCodeTestApp::resourceInitialization() {
 };
 
 int QRCodeTestApp::run() {
+
+
+    qmlRegisterType<QtQuickQRCode> ("QtQuickQRCode",1,0,"QtQuickQRCode");
 
     engine = new QQmlApplicationEngine(settings->qmlSettings.realQmlFile, this);
     if (engine->rootObjects().isEmpty())

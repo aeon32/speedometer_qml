@@ -41,7 +41,7 @@
 import QtQuick 2.0
 import QtQuick.Window 2.1
 import QtQuick.Controls 1.2
-/*import QtQuick.Controls 2.0*/
+import QtQuickQRCode 1.0
 
 
 
@@ -62,22 +62,25 @@ ApplicationWindow {
     }
 
 
-     ListView {
-         id : variablesView
-         height: visible ? 200 : 0
+    
+     QtQuickQRCode {
+        id: qrCode
+        // позиционируем его и задаём размеры
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.right:parent.right
+        anchors.top:parent.top
+ 
+        // Определяем его свойства, которые Q_PROPERTY
+        qrString: "vasya"
+        backgroundColor: "White"
 
-         anchors.left: parent.left
-         anchors.bottom: parent.bottom
-         anchors.right:parent.right
+    }
 
-         visible : false
-
-
-         model : ListModel {id: model}
-
-         
-
-     }
+     Timer {
+        interval: 15000; running: false; repeat: true
+        onTriggered: qrCode.qrString = Date().toString()
+    }
 
 
 
