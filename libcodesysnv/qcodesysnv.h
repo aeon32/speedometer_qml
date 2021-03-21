@@ -37,6 +37,8 @@
 #include <type_traits>
 #include <QDataStream>
 
+#include "cassert"
+
 
 using namespace std;
 
@@ -53,7 +55,7 @@ class QCodesysNVType;
 template <typename Type> class QCodesysNVConvert;
 
 //variable types in the computer
-enum class QCodesysNVcmpType {qint8,quint8,qint16,quint16,qint32,quint32,qint64,quint64,qfloat,qdouble};
+enum class QCodesysNVcmpType {qint8,quint8,qint16,quint16,qint32,quint32,qint64,quint64,qfloat,qdouble,QString};
 
 
 //this class handles receiving and sending of QCodesysNVTelegrams
@@ -267,6 +269,7 @@ public:
     static const QCodesysNVType UDINT;
     static const QCodesysNVType REAL;
     static const QCodesysNVType LREAL;
+    static const QCodesysNVType STRING;
 
     static QVariant convertToVariant(const QString & value, QCodesysNVType netType);
     //list of all codesys varirable types
@@ -379,8 +382,16 @@ void QCodesysNVConvert<Type>::convertFromBytes(QByteArray bytes, QCodesysNVType 
         double tempVar;
         stream >> tempVar;
         variable = (Type) tempVar;
-    }
+    };
 }
+
+
+//specialization for string variables
+template<>
+void QCodesysNVConvert<QString>::convertFromBytes(QByteArray bytes, QCodesysNVType cmpType, QString & variable);
+
+
+
 
 
 //convert any variable type (by using casting if necessary) to QByteArray format which is suitable for Codesys UDP telegram
@@ -444,7 +455,12 @@ void QCodesysNVConvert<Type>::convertToBytes(QByteArray& bytes, QCodesysNVType c
         stream.setFloatingPointPrecision(QDataStream::DoublePrecision);
         double tempVar = (double) variable;
         stream << tempVar;
-    }
+    } else if(cmpType.varType == QCodesysNVcmpType::QString) {
+        assert( false);
+
+    };
+
+
 }
 
 

@@ -10,6 +10,7 @@
 #include <QDir>
 #include <QSettings>
 #include <QStack>
+#include <QDebug>
 #include <strstream>
 
 
@@ -155,6 +156,8 @@ namespace awash {
         videoSettings.idleVideo = qsettings.value("video/idle", "${MEDIADIR}" + QString("/video/Idle.mp4") ).toString();
 
         qmlSettings.realQmlFile = processSpecialDirs(qmlSettings.qmlFile);
+
+
         codeSysSettings.realGvlFile = processSpecialDirs(codeSysSettings.gvlFile);
 
         videoSettings.realActiveCleanVideo = processSpecialDirs( videoSettings.activeCleanVideo);

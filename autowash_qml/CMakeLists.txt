@@ -93,7 +93,7 @@ ENDIF(develop_flags)
 
 ADD_EXECUTABLE(${SUBPROJECT}  ${UI_HEADERS} ${HEADERS} ${MOC_HEADERS} ${SOURCES} ${MOC_SOURCES}  ${UI_SOURCES}   ${GENERATED_SOURCES} ${RCCS} )
 #TARGET_LINK_LIBRARIES (${SUBPROJECT}  eom codesysnv iec61131parser ${Boost_LIBRARIES} )
-TARGET_LINK_LIBRARIES (${SUBPROJECT}  eom codesysnv iec61131parser)
+TARGET_LINK_LIBRARIES (${SUBPROJECT}  eom codesysnv iec61131parser qtquickauxitems)
 
 Qt5_USE_MODULES(${SUBPROJECT} Widgets Network Qml Gui Quick)
 
