@@ -142,6 +142,9 @@ Item {
         property int lockMid: 0;
         // 1 - замок закрыт; 0 - замок открыт
 
+        property string qrString0 : "";
+        property string qrString1 : "";
+
 
 
         property var variableList;

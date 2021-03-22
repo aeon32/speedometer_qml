@@ -44,6 +44,7 @@ const QCodesysNVType QCodesysNVType::DINT = QCodesysNVType(8,"DINT",4,QCodesysNV
 const QCodesysNVType QCodesysNVType::UDINT = QCodesysNVType(9,"UDINT",4,QCodesysNVcmpType::quint32);
 const QCodesysNVType QCodesysNVType::REAL = QCodesysNVType(10,"REAL",4,QCodesysNVcmpType::qfloat);
 const QCodesysNVType QCodesysNVType::LREAL = QCodesysNVType(11,"LREAL",8,QCodesysNVcmpType::qdouble);
+const QCodesysNVType QCodesysNVType::STRING = QCodesysNVType(12,"STRING",81,QCodesysNVcmpType::QString);
 
 static QList<QCodesysNVType> defaultList() {
 	QList<QCodesysNVType> res;
@@ -60,6 +61,7 @@ static QList<QCodesysNVType> defaultList() {
 	res.append(QCodesysNVType::UDINT);
 	res.append(QCodesysNVType::REAL);
 	res.append(QCodesysNVType::LREAL);
+	res.append(QCodesysNVType::STRING);
 
 	return res;
 };
@@ -81,9 +83,20 @@ QVariant QCodesysNVType::convertToVariant(const QString & value, QCodesysNVType 
         return QVariant(value.toInt());
     } else if (netType == QCodesysNVType::REAL || netType == LREAL ) {
         return QVariant(value.toDouble());
+    } else if (netType == QCodesysNVType::STRING) {
+       return QVariant(value);
+
     } else {
         return QVariant();
     };
+
+};
+//specialization for string variables
+template<>
+void QCodesysNVConvert<QString>::convertFromBytes(QByteArray bytes, QCodesysNVType cmpType, QString & variable)
+{
+
+    variable = QString::fromUtf8(bytes.data());
 
 };
 
@@ -623,6 +636,8 @@ quint16 QCodesysNVTelegram::readPort()
 void QCodesysNVTelegram::dataVarToString(int index,QString& variableString)
 {
     variableString.clear();
+
+   //. qDebug()<<variableTypeList[index].name <<" "<< (variableTypeList[index].varType==QCodesysNVcmpType::QString);
     if (index < variableTypeList.length())
     {
         if(variableTypeList[index].varType==QCodesysNVcmpType::quint8 || variableTypeList[index].varType==QCodesysNVcmpType::quint16 || variableTypeList[index].varType==QCodesysNVcmpType::quint32 || variableTypeList[index].varType==QCodesysNVcmpType::quint64)
@@ -643,7 +658,12 @@ void QCodesysNVTelegram::dataVarToString(int index,QString& variableString)
             readData(index,tempData);
             variableString.append(QString::number(tempData));
         }
-        else
+        else if(variableTypeList[index].varType==QCodesysNVcmpType::QString) {
+            QString tempData;
+            readData(index, tempData);
+            variableString.append(tempData);
+
+        } else
         {
 
             qDebug() << "QCodesysNVTelegram::dataVarToString: Wrong datatype (deep, unexpexted bug, in QCodesysNV* classes)";
@@ -760,8 +780,11 @@ void QCodesysNVTelegram::dataToStringList(QStringList &dataStrings)
     {
         for(int i=0;i<variableTypeList.length();i++)
         {
+
             QString tempString;
             dataVarToString(i,tempString);
+
+
             dataStrings.push_back(tempString);
         }
 

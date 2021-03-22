@@ -16,6 +16,8 @@
 #include <libcodesysnv/qcodesysnv.h>
 #include <libcodesysnv/codesysnvlistparser.h>
 
+#include <libqtquickauxitems/qtquickqrcode.h>
+
 #include <initializer_list>
 
 
@@ -167,7 +169,7 @@ bool AutoWashQmlApp::resourceInitialization()
     QStringList variableTypes;
     for (CodeSysNvListParser::Variable & var : gvlVariableList)
     {
-        //EOM_LOG_ERROR << var.name << eom::endl;
+        //EOM_LOG_ERROR << var.name <<" "<<var.type<< eom::endl;
         variableTypes.append(var.type);
         netVariableNames.append(var.name);
 
@@ -265,6 +267,7 @@ void AutoWashQmlApp::on_dataAvailable()
         }
         else
         {
+
             variantMap.insert((*netVariableNamesIt), data);
         };
 
@@ -361,6 +364,8 @@ int AutoWashQmlApp::run()
 {
     QFontDatabase::addApplicationFont(":/fonts/DejaVuSans.ttf");
     setFont(QFont("DejaVu Sans"));
+
+    qmlRegisterType<QtQuickQRCode> ("QtQuickQRCode",1,0,"QtQuickQRCode");
 
     engine = new QQmlApplicationEngine(settings->qmlSettings.realQmlFile, this);
     if (engine->rootObjects().isEmpty())

@@ -96,6 +96,8 @@ VAR_GLOBAL
 	// состояние среднего замка
 	lockMid: INT;
 	// 1 - замок закрыт; 0 - замок открыт
+	 qrString0 : STRING;
+     qrString1 : STRING;
 END_VAR]]></Declarations>
   <NetvarSettings Protocol="UDP">
     <ListIdentifier>1</ListIdentifier>

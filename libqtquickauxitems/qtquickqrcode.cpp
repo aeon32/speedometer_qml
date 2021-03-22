@@ -28,7 +28,7 @@ void QtQuickQRCode::paint(QPainter *painter)
     painter->setBrush(brush);
 
     painter->fillRect(boundingRect(), brush);
-    painter->drawPixmap(20, 20, m_qrPixmap);
+    painter->drawPixmap(0, 0, m_qrPixmap);
 
 
 };
@@ -76,12 +76,12 @@ void QtQuickQRCode::updateQRPixmap()
 {
       QRcode * qrCode = NULL;
 
-      char * sourceString = strdup(m_qrString.toUtf8().data());
-
+     char * sourceString = strdup(m_qrString.toUtf8().data());
+     QPixmap newQRPixmap;
 
      if (qrCode = QRcode_encodeString(sourceString, 0, QR_ECLEVEL_H, QR_MODE_8, 1))
 	 {
-	    QPixmap newQRPixmap;
+
 	    unsigned char * qrData = qrCode->data;
 
 
@@ -108,16 +108,15 @@ void QtQuickQRCode::updateQRPixmap()
 
 		}
 
-		m_qrPixmap = newQRPixmap;
 		QRcode_free(qrCode);
 	} else {
 	   //TODO : print error
-	   std::cout<<"error 1"<<std::endl;
+	   qWarning()<<"QRcode_encodeString result is null";
+
 	};
+	m_qrPixmap = newQRPixmap;
 
 	free(sourceString);
-
-
 
 
 

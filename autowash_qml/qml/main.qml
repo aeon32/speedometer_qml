@@ -131,6 +131,7 @@ ApplicationWindow {
                 // 	CASHCOLLECT	:= 700,	// Экран инкассации
                 // 	CASHCOLLECT_FIN	:= 710,	// Экран окончания инкассации
                 // 	FREEMONEY	:= 800	// Экран добавления денег
+                //  QRCODE      := 900  // Экран QR-кода
                 // 	STOP		:= 1000	// Экран состояния останова поста
                 case 0 :
                         modeView.mode = "FUNC";
@@ -174,6 +175,7 @@ ApplicationWindow {
                 case 700 : modeView.mode = "CASHCOLLECT"; break;
                 case 710 : modeView.mode = "CASHCOLLECT_FIN"; break;
                 case 800 : modeView.mode = "FREEMONEY"; break;
+                case 900 : modeView.mode = "QRCODE"; break;
                 case 1000 : modeView.mode = "STOP"; break;
                 default:
                     modeView.state = "FUNC";
@@ -377,6 +379,12 @@ ApplicationWindow {
             visible: parent.mode == "IDLE"  && !parent.playingOneShotVideo
             anchors.fill: parent
         }
+
+        VisQRCode {
+            id :visQRCode
+            visible: parent.mode == "QRCODE"  && !parent.playingOneShotVideo
+            anchors.fill: parent
+        }        
 
 
 
