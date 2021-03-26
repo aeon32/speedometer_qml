@@ -145,7 +145,7 @@ void QtQuickQRCode::updateQRPixmap()
 
 	};
 	m_qrPixmap = newQRPixmap;
-    qDebug() << m_qrPixmap.width();
+
 
 	free(sourceString);
 
