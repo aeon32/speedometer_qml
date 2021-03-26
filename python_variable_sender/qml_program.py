@@ -33,9 +33,11 @@ def createVarList():
              ('costPause', VariableTypes.INT, 100),
              ('lockTop', VariableTypes.INT, 1),
              ('lockMid', VariableTypes.INT, 2),
-             ('qrString0', VariableTypes.STRING, "ва".encode('utf-8')),
-             ('qrString1', VariableTypes.STRING, "ся".encode('utf-8'))
+             ('qrString0', VariableTypes.STRING, "t=20210322T2008&s=123.00&fn=9252440300238147&i=3&fp=3773188529&n=5".encode('utf-8')),
+             ('qrString1', VariableTypes.STRING, "".encode('utf-8'))
     ]
+
+
 
     varList = VariableList(vars)
     return varList

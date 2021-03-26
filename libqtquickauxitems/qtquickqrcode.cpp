@@ -44,6 +44,10 @@ QColor QtQuickQRCode::backgroundColor() const
     return m_backgroundColor;
 }
 
+QColor QtQuickQRCode::pixelColor() const
+{
+    return m_pixelColor;
+};
 
 void QtQuickQRCode::setQRString(const QString qrString)
 {
@@ -71,6 +75,18 @@ void QtQuickQRCode::setBackgroundColor(const QColor backgroundColor)
 
 }
 
+void QtQuickQRCode::setPixelColor(const QColor pixelColor)
+{
+    if (m_pixelColor == pixelColor)
+        return;
+
+    m_pixelColor = pixelColor;
+    updateQRPixmap();
+    update();
+    emit pixelColorChanged(pixelColor);
+
+}
+
 
 void QtQuickQRCode::updateQRPixmap()
 {
@@ -83,15 +99,29 @@ void QtQuickQRCode::updateQRPixmap()
 	 {
 
 	    unsigned char * qrData = qrCode->data;
+	    QRectF itemRect = this->boundingRect();
+
+	    qreal width = itemRect.width();
+	    qreal height = itemRect.height();
+	    qreal widthBlockSize;
+	    qreal heightBlockSize;
+	    if (qrCode->width > 0)
+        {
+           widthBlockSize = width/qrCode->width;
+           heightBlockSize = height/qrCode->width;
+	    }
 
 
 
-	    newQRPixmap = QPixmap(qrCode->width * QR_BLOCK_SIZE, qrCode->width * QR_BLOCK_SIZE);
+
+	    std::cout<<"width "<<width<<" height "<<height<<std::endl;
+
+	    newQRPixmap = QPixmap( ((int) width) + 1, ((int)height) + 1 );
 	    newQRPixmap.fill(m_backgroundColor);
 
 	    QPainter qrPixmapPainter (&newQRPixmap);
-	    qrPixmapPainter.setBrush(QBrush(Qt::black));
-	    qrPixmapPainter.setPen(QPen(Qt::black));
+	    qrPixmapPainter.setBrush(QBrush(m_pixelColor));
+	    qrPixmapPainter.setPen(QPen(m_pixelColor));
 
 		for(int y = 0; y < qrCode->width; y++)
 		{
@@ -99,7 +129,7 @@ void QtQuickQRCode::updateQRPixmap()
 			{
 				if (*qrData & 1)
 				{
-				   qrPixmapPainter.drawRect(x*QR_BLOCK_SIZE, y*QR_BLOCK_SIZE, QR_BLOCK_SIZE, QR_BLOCK_SIZE);
+				   qrPixmapPainter.drawRect(QRectF(x*widthBlockSize, y*heightBlockSize, widthBlockSize, heightBlockSize));
 				}
 
 
@@ -115,9 +145,19 @@ void QtQuickQRCode::updateQRPixmap()
 
 	};
 	m_qrPixmap = newQRPixmap;
+    qDebug() << m_qrPixmap.width();
 
 	free(sourceString);
 
 
+
+};
+
+void QtQuickQRCode::geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry)
+{
+    if (newGeometry.size() != oldGeometry.size())
+    {
+       updateQRPixmap();
+    };
 
 };

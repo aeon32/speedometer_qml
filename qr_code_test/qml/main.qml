@@ -35,13 +35,16 @@ ApplicationWindow {
 
          
                 // Определяем его свойства, которые Q_PROPERTY
-                qrString: "Вася"
-                backgroundColor: "White"
-                width:25*10
-                height:25*10
+                qrString: "Вася235723d34tu349tyu349uyt9034uy90tu349utgj93ujgjeojg34ouj tg9-034u9-g3u9"
+                //color format #AARRGGBB
+                backgroundColor: "#00FFFFFF"
+                pixelColor: "#FF000000"
+                width:300
+                height:300
 
 
             }
+          color:"Cyan"
 
        }
 
