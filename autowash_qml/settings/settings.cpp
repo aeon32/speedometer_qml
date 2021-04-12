@@ -135,6 +135,7 @@ namespace awash {
 		listeningSettings.host = qsettings.value("listening/host", "").toString();
 		listeningSettings.port = qsettings.value("listening/port", 1202).toInt();
 		listeningSettings.cob_id = qsettings.value("listening/cob_id", 1).toInt();
+		listeningSettings.no_data_timeout = qsettings.value("listening/no_data_timeout", 15000).toInt();
 
         qmlSettings.qmlFile = qsettings.value("qml/qml_file", "${MEDIADIR}" + QString("/qml/main.qml")).toString();
         qmlSettings.qmlDebug = qsettings.value("qml/qml_debug", QVariant(false)).toBool();
@@ -188,7 +189,7 @@ namespace awash {
 		qsettings->setValue("listening/host", listeningSettings.host);
 		qsettings->setValue("listening/port", listeningSettings.port);
 		qsettings->setValue("listening/cob_id", listeningSettings.cob_id);
-
+		qsettings->setValue("listening/no_data_timeout", listeningSettings.no_data_timeout);
 
 
 		qsettings->setValue("qml/qml_file",  qmlSettings.qmlFile );
