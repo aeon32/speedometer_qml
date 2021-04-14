@@ -1,6 +1,7 @@
 
 import QtQuick 2.2
-import QtMultimedia 5.6
+//import QtMultimedia 5.6
+import QtAV 1.6
 import "./qmlelements" as QMLElements
 
 
@@ -36,7 +37,7 @@ Item {
 
     }
 
-    VideoOutput {
+    VideoOutput2 {
 
         id:videoOutput
         source:mediaPlayer
