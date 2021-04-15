@@ -3,7 +3,7 @@ SET(CMAKE_SYSTEM_VERSION 1)
 #set(CMAKE_SYSTEM_PROCESSOR arm)
 
 SET (ROOT_PATH /mnt/pi)
-SET (MYQTDIR /home/user/Qt5.6.2/5.6/gcc_64/)
+SET (MYQTDIR /home/user/Qt5.11.3/5.11.3/gcc_64/)
 
 # specify the cross compiler
 #SET(CMAKE_C_FLAGS "-mfloat-abi=hard -mfpu=fpv4-sp-d16")
@@ -11,8 +11,9 @@ SET (MYQTDIR /home/user/Qt5.6.2/5.6/gcc_64/)
 #SET(CMAKE_C_COMPILER  /usr/bin/arm-linux-gnueabihf-gcc-5 )
 #SET(CMAKE_CXX_COMPILER  /usr/bin/arm-linux-gnueabihf-g++-5 )
 
-SET(CMAKE_C_COMPILER /home/user/projects/raspberry_tools/tools/arm-bcm2708/gcc-raspbian-my/bin/arm-linux-gnueabihf-gcc)
-SET(CMAKE_CXX_COMPILER /home/user/projects/raspberry_tools/tools/arm-bcm2708/gcc-raspbian-my/bin/arm-linux-gnueabihf-g++)
+
+SET(CMAKE_C_COMPILER /home/user/projects/raspberry_tools/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc)
+SET(CMAKE_CXX_COMPILER /home/user/projects/raspberry_tools/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-g++)
 
 
 SET(CMAKE_LIBRARY_ARCHITECTURE arm-linux-gnueabihf)
