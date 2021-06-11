@@ -111,11 +111,6 @@ void QtQuickQRCode::updateQRPixmap()
            heightBlockSize = height/qrCode->width;
 	    }
 
-
-
-
-	    std::cout<<"width "<<width<<" height "<<height<<std::endl;
-
 	    newQRPixmap = QPixmap( ((int) width) + 1, ((int)height) + 1 );
 	    newQRPixmap.fill(m_backgroundColor);
 

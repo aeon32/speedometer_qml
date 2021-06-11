@@ -389,7 +389,7 @@ int AutoWashQmlApp::run()
     if (settings->qmlSettings.demoMode)
         testTimer.start();
 
-    timeOutTimer.setInterval(4000);
+    timeOutTimer.setInterval(settings->listeningSettings.no_data_timeout);
     if (!settings->qmlSettings.demoMode)
         timeOutTimer.start();
 

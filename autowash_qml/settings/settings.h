@@ -50,6 +50,8 @@ public:
         unsigned int port;
         unsigned int cob_id;
 
+        unsigned int no_data_timeout;
+
     } listeningSettings;
 
     struct QMLSettings

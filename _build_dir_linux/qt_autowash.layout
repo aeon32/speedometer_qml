@@ -2,19 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="autowash_qml" />
-	<File name="../autowash_qml/settings/settings.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../autowash_qml/autowashqmlapp.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2486" topLine="86" />
-		</Cursor>
-	</File>
-	<File name="../qr_code_test/main.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="624" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../qr_code_test/settings/settings.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1128" topLine="23" />
+			<Cursor1 position="1005" topLine="40" />
 		</Cursor>
 	</File>
 	<File name="../autowash/main.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -22,39 +12,9 @@
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="../autowash/autowashapp.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../qr_code_test/settings/settings.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="33" />
-		</Cursor>
-	</File>
-	<File name="../libqtquickauxitems/qtquickqrcode.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="926" topLine="7" />
-		</Cursor>
-	</File>
-	<File name="../libqtquickauxitems/qtquickqrcode.cpp" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1414" topLine="71" />
-		</Cursor>
-	</File>
-	<File name="../autowash_qml/autowashqmlapp.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="86" topLine="120" />
-		</Cursor>
-	</File>
-	<File name="../qr_code_test/settings/settings.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3749" topLine="64" />
-		</Cursor>
-	</File>
-	<File name="../autowash_qml/config.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1095" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="../qr_code_test/qrcodetestapp.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="837" topLine="18" />
+			<Cursor1 position="1128" topLine="23" />
 		</Cursor>
 	</File>
 	<File name="../libqtquickauxitems/qtquickqrcode.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -62,20 +22,19 @@
 			<Cursor1 position="926" topLine="7" />
 		</Cursor>
 	</File>
-	<File name="../autowash_qml/settings/settings.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../autowash_qml/settings/settings.cpp" open="1" top="1" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="472" topLine="6" />
+			<Cursor1 position="2528" topLine="81" />
 		</Cursor>
 	</File>
-	<File name="../libqrencode/qrencode.h" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../libqrencode/qrencode.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="14848" topLine="402" />
+			<Cursor1 position="15095" topLine="402" />
 		</Cursor>
 	</File>
-	<File name="../qr_code_test/qrcodetestapp.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../libqtquickauxitems/qtquickqrcode.cpp" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-<<<<<<< HEAD
-			<Cursor1 position="168" topLine="0" />
+			<Cursor1 position="1414" topLine="71" />
 		</Cursor>
 	</File>
 	<File name="../qr_code_test/config.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -83,9 +42,39 @@
 			<Cursor1 position="600" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="../autowash_qml/autowashqmlapp.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../qr_code_test/main.cpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1600" topLine="40" />
+			<Cursor1 position="624" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../autowash/autowashapp.cpp" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="33" />
+		</Cursor>
+	</File>
+	<File name="../autowash_qml/autowashqmlapp.cpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10450" topLine="360" />
+		</Cursor>
+	</File>
+	<File name="../autowash_qml/settings/settings.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1191" topLine="30" />
+		</Cursor>
+	</File>
+	<File name="../qr_code_test/settings/settings.cpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3749" topLine="64" />
+		</Cursor>
+	</File>
+	<File name="../qr_code_test/qrcodetestapp.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../autowash_qml/config.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="914" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
