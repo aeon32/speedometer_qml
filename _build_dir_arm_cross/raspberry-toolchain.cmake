@@ -2,7 +2,7 @@ SET(CMAKE_SYSTEM_NAME Linux)
 SET(CMAKE_SYSTEM_VERSION 1)
 #set(CMAKE_SYSTEM_PROCESSOR arm)
 
-SET (ROOT_PATH /mnt/pi)
+SET (ROOT_PATH /home/user/projects/raspberry_sysroot)
 SET (MYQTDIR /home/user/Qt5.11.3/5.11.3/gcc_64/)
 
 # specify the cross compiler
@@ -31,7 +31,10 @@ SET(MY_RCC ${MYQTDIR}/bin/rcc)
 # where is the target environment 
 SET(CMAKE_FIND_ROOT_PATH  ${ROOT_PATH})
 SET(CMAKE_SYSROOT ${ROOT_PATH})
+
 LINK_DIRECTORIES("${ROOT_PATH}/usr/lib" "${ROOT_PATH}/lib/${CMAKE_LIBRARY_ARCHITECTURE}" "${ROOT_PATH}/usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}")
+
+#LINK_DIRECTORIES("/usr/lib" "lib/${CMAKE_LIBRARY_ARCHITECTURE}" "/usr/lib/${CMAKE_LIBRARY_ARCHITECTURE}")
 
 # search for programs in the build host directories
 SET(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
