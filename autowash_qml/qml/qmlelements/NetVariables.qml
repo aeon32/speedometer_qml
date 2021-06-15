@@ -42,7 +42,6 @@ import QtQuick 2.2
 
 
 
-
 Item {
     id: valueSource
 
@@ -150,13 +149,15 @@ Item {
         property var variableList;
 
         onVariableListChanged: {
+            var log_values = ""
             for (var varName in variableList) {
                 if (varName in valueSource) {
+                    log_values += varName + " " + variableList[varName] + " "
 
                     valueSource[varName] = variableList[varName];
                 };
             }
-            
+            log.debug("VariableList changed, values " + log_values);
             //this.postMode = 1000;
             //this.postCounterFund= 0;            
             

@@ -6,6 +6,7 @@
 #include <QtGui/QFont>
 #include <QtGui/QFontDatabase>
 #include <QtQuick/qquickitem.h>
+#include <QtGlobal>
 #include <QMessageBox>
 
 #include "settings/settings.h"
@@ -90,6 +91,7 @@ void AutoWashQmlApp::setupLogger()
     eom::LoggerStream::setLogLevel(eom::LoggerStream::fromSettings(settings->loggerSettings.logLevel));
     eom::LoggerStream::setLogPrefix(settings->loggerSettings.prefix);
     //eom::LoggerStream::setCStringEncoding("UTF-8");
+    qSetMessagePattern(QString("%{time MMMM-dd hh:mm::ss} %{category} %{message}"));
 
 };
 
@@ -125,6 +127,7 @@ int AutoWashQmlApp::exec()
         return -1;
 
     };
+
 
 
     return run();

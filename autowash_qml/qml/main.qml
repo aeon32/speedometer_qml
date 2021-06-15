@@ -97,6 +97,10 @@ ApplicationWindow {
 
     }
 
+    QMLElements.Log {
+       id: log
+    }
+
     QMLElements.VideoFiles {
         id: videoFiles
         variableList : []
@@ -314,8 +318,18 @@ ApplicationWindow {
            visible:  parent.playingOneShotVideo
            onVideoStopped:
            {
-               console.log("video stopped")
+               log.debug("video " + this.videoFile + " stopped")
                parent.oneShotVideoStopped()
+           }
+
+           onVideoPlaying:
+           {
+               log.debug("video " + this.videoFile + " played")
+
+           }
+           onVisibleChanged : {
+               log.debug("visibility of visVideo has became " + this.visible)
+
            }
 
         }
@@ -356,6 +370,10 @@ ApplicationWindow {
             anchors.fill: parent
             fonts: myFonts
             state:parent.buttonState
+            onVisibleChanged : {
+               log.debug("visibility of visFunc has became " + this.visible)
+
+            }
 
 
         }

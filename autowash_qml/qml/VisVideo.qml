@@ -12,6 +12,7 @@ Item {
     property string videoFile:""
     property bool looped : false
     signal videoStopped()
+    signal videoPlaying()
 
     visible : false
 
@@ -49,6 +50,7 @@ Item {
     Component.onCompleted:
     {
         mediaPlayer.stopped.connect(videoStopped)
+        mediaPlayer.playing.connect(videoPlaying)
     }
 
 }
