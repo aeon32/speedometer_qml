@@ -1,7 +1,6 @@
-
 import QtQuick 2.2
 //import QtMultimedia 5.6
-import QtAV 1.6
+import QtAV 1.7
 import "./qmlelements" as QMLElements
 
 
@@ -35,6 +34,12 @@ Item {
         autoLoad: true
         loops: looped ? MediaPlayer.Infinite : 1
         source: item.videoFile
+        onError : {
+           
+           log.debug("media player error : " + errorString);
+           item.videoStopped();
+
+        }
 
     }
 

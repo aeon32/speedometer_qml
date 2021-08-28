@@ -112,6 +112,7 @@ ApplicationWindow {
         id: valueSource
         variableList : []
         onPostModeChanged: {
+            log.debug("onPostModeChanged "+this.postMode)
 
 
             switch (this.postMode) {
@@ -289,6 +290,7 @@ ApplicationWindow {
 
         function playOneShotVideo(videoFile)
         {
+            log.debug("playOneShotVideo " + videoFile)
             visVideo.videoFile = videoFile;
             playingOneShotVideo = true;
             visVideo.play()

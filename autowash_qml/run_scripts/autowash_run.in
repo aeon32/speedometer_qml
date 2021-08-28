@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+#you need to switch on dumping:
+#ulimit -c unlimited
+#echo core.%p > /proc/sys/kernel/core_pattern
+SCRIPT_PATH="$(cd `dirname $0` && pwd)"
+
+#BINPATH is settled by cmake"
+BINPATH="$SCRIPT_PATH"
+PROGRAM="$BINPATH/autowash_qml"
+LOGPATH=~/.autowash
+mkdir -p "$LOGPATH"
+LOGFILE="$LOGPATH/autowash.log"
+
+export QT_LOGGING_RULES=*.debug=true
+export QT_LOGGING_RULES=qt.multimedia.*=true 
+
+log() {
+  date=$(date '+%d.%m.%Y %H:%M:%S')
+  echo "$date" watchdog "$1"  
+}
+
+
+error() {
+  date=$(date '+%d.%m.%Y %H:%M:%S')
+  echo "$date" watchdog "$1" >&2
+}
+
+
+kill_prog() {
+  log "Sig received"
+  KILLTIMEOUT=3
+  if [[ -n $pid ]] ; then
+     kill $pid > /dev/null 2>&1
+     log "Sigterm sended"
+     starttime=$(date +%s)
+     while kill -0 $pid > /dev/null 2>&1  && [[ $(( $(date +%s) - $starttime))  -le $KILLTIMEOUT ]]; do
+     	log "Waiting for process dying"
+     	sleep 1
+     done
+     kill -9 $pid > /dev/null 2>&1
+     wait $pid
+  fi
+  exit 1
+
+}
+
+trap kill_prog EXIT SIGHUP SIGINT SIGTERM SIGKILL
+
+
+exec  &> >(rotatelogs -e -n 5 "$LOGFILE" 15M)
+
+trycount=1
+
+
+while true; do
+  "$PROGRAM" & 
+   pid=$!
+   log "Starting $PROGRAM .."
+   while true; do
+      if kill -0 $pid > /dev/null 2>&1; then
+          sleep 1
+      else
+          error "$PROGRAM has failed"
+          #((trycount++))
+          #exec  &> >(tee "log$trycount.out")
+          break
+          
+      fi
+
+   done
+done
+
+

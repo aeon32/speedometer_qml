@@ -11,7 +11,7 @@
 //релиз всего проекта, берётся из _build_dir/CMakeLists.txt
 #define projectRelease     ""
 //тип сборки проекта, берётся из _build_dir/CMakeLists.txt (варианты DEVELOP, DISTRIB, WORK)
-#define projectBuildType  "DEVELOP"
+#define projectBuildType  "DISTRIB"
 
 
 #endif

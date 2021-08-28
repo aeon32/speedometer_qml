@@ -91,7 +91,7 @@ void AutoWashQmlApp::setupLogger()
     eom::LoggerStream::setLogLevel(eom::LoggerStream::fromSettings(settings->loggerSettings.logLevel));
     eom::LoggerStream::setLogPrefix(settings->loggerSettings.prefix);
     //eom::LoggerStream::setCStringEncoding("UTF-8");
-    qSetMessagePattern(QString("%{time MMMM-dd hh:mm::ss} %{category} %{message}"));
+    qSetMessagePattern(QString("%{time dd.MM.yyyy hh:mm::ss} %{category} %{message}"));
 
 };
 
