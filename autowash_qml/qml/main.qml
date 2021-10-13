@@ -398,6 +398,26 @@ ApplicationWindow {
             videoFile:videoFiles.idleVideo
             visible: parent.mode == "IDLE"  && !parent.playingOneShotVideo
             anchors.fill: parent
+
+           onVideoStopped:
+           {
+               log.debug("video " + this.videoFile + " stopped")
+               if (visible)
+               {
+                   play()
+
+               }
+           }
+
+           onVideoPlaying:
+           {
+               log.debug("video " + this.videoFile + " played")
+
+           }
+           onVisibleChanged : {
+               log.debug("visibility of visIdle has became " + this.visible)
+
+           }            
         }
 
         VisQRCode {

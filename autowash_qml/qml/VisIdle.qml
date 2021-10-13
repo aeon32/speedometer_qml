@@ -11,12 +11,25 @@ Item {
     height:1024
     property string videoFile: ""
 
+    signal videoStopped()
+    signal videoPlaying()
+
+
     MediaPlayer {
         id: mediaPlayer
         autoPlay: false
         autoLoad: true
-        loops:MediaPlayer.Infinite
+        loops:1
         source: item.videoFile
+
+        onStopped : {
+           log.debug("idle video stopped ")
+
+
+        }
+
+
+
     }
 
     VideoOutput2 {
@@ -28,13 +41,23 @@ Item {
 
     onVisibleChanged:
     {
+
         if (visible)
             mediaPlayer.play()
         else
             mediaPlayer.stop()
     }
 
+    Component.onCompleted:
+    {
+        mediaPlayer.stopped.connect(videoStopped)
+        mediaPlayer.playing.connect(videoPlaying)
+    }
 
+    function play()
+    {
+        mediaPlayer.play()
+    }
 
 
 }

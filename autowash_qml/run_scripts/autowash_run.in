@@ -51,7 +51,7 @@ kill_prog() {
 trap kill_prog EXIT SIGHUP SIGINT SIGTERM SIGKILL
 
 
-#exec  &> >(rotatelogs -e -n 5 "$LOGFILE" 15M)
+exec  &> >(rotatelogs -e -n 5 "$LOGFILE" 15M)
 
 trycount=1
 
