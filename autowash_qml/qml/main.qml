@@ -292,9 +292,8 @@ ApplicationWindow {
         {
             log.debug("playOneShotVideo " + videoFile)
             visVideo.videoFile = videoFile;
-            playingOneShotVideo = true;
-            visVideo.play()
-
+            //playingOneShotVideo = true;
+            visVideo.play();
         }
 
         function oneShotVideoStopped()
@@ -327,6 +326,7 @@ ApplicationWindow {
            onVideoPlaying:
            {
                log.debug("video " + this.videoFile + " played")
+               parent.playingOneShotVideo = true;
 
            }
            onVisibleChanged : {

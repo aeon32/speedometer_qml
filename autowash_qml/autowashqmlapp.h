@@ -85,6 +85,7 @@ private:
 
     QTimer testTimer;
     QTimer timeOutTimer;
+    QTimer watchDogTimer;
 
 private slots:
     void on_codesysTelegramReceived(QString IP, unsigned int port, unsigned int bytes, unsigned int cobid);
@@ -95,6 +96,8 @@ private slots:
     void on_initializationError();
 
     void on_timeOutTimerTimeout();
+
+    void on_watchDogTimerTimeout();
 };
 
 };

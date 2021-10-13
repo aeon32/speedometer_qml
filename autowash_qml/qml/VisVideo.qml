@@ -27,6 +27,17 @@ Item {
     {
         mediaPlayer.play()
     }
+   
+    function stop()
+    {
+       mediaPlayer.stop()
+    }
+
+    function pause()
+    {
+       mediaPlayer.pause()
+    }
+
 
     MediaPlayer {
         id: mediaPlayer
@@ -35,9 +46,10 @@ Item {
         loops: looped ? MediaPlayer.Infinite : 1
         source: item.videoFile
         onError : {
-           
-           log.debug("media player error : " + errorString);
-           item.videoStopped();
+           if (error != MediaPlayer.NoError) {
+              log.debug("media player error : " + errorString);
+              item.videoStopped();
+           };
 
         }
 

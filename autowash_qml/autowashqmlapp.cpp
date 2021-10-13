@@ -37,6 +37,7 @@ namespace
 
 const char * PROGNAME = PROJECT_NAME;
 
+const int WATCHDOG_TIMER_TIMEOUT = 2000;
 
 };
 
@@ -46,7 +47,8 @@ const char * PROGNAME = PROJECT_NAME;
 ******************************************************************************/
 
 AutoWashQmlApp::AutoWashQmlApp(int argc, char **argv):QApplication(argc, argv), argC(argc), argV(argV),
-    engine(nullptr),  receivableTelegram(nullptr), socket(nullptr), testTimer(this), testMoneyIndexValue(0), timeOutTimer(this), oldButtonActive(-1),
+    engine(nullptr),  receivableTelegram(nullptr), socket(nullptr), testTimer(this), watchDogTimer(this),
+    testMoneyIndexValue(0), timeOutTimer(this), oldButtonActive(-1),
     lastPostCounterFund(0)
 {
 
@@ -57,6 +59,7 @@ AutoWashQmlApp::AutoWashQmlApp(int argc, char **argv):QApplication(argc, argv), 
 
     connect(&testTimer, SIGNAL(timeout()), this, SLOT(on_testTimerTimeout()));
     connect(&timeOutTimer, SIGNAL(timeout()), this, SLOT(on_timeOutTimerTimeout()));
+    connect(&watchDogTimer, SIGNAL(timeout()), this, SLOT(on_watchDogTimerTimeout()));
 
 
     timeOutTimer.setSingleShot(true);
@@ -321,6 +324,7 @@ void AutoWashQmlApp::on_dataAvailable()
     if (ok)
     	setWorkingMode(dMode);
     */
+    watchDogTimer.start();
 };
 
 void AutoWashQmlApp::setQMLSettings(bool debugFlag, bool animation, int animationTime)
@@ -387,14 +391,18 @@ int AutoWashQmlApp::run()
 
 
 
-    testTimer.setInterval(3000);
+    testTimer.setInterval(2000);
 
     if (settings->qmlSettings.demoMode)
         testTimer.start();
 
     timeOutTimer.setInterval(settings->listeningSettings.no_data_timeout);
+
     if (!settings->qmlSettings.demoMode)
         timeOutTimer.start();
+
+    watchDogTimer.setInterval(WATCHDOG_TIMER_TIMEOUT);
+    watchDogTimer.start();
 
     int res = QApplication::exec();
     return res;
@@ -448,6 +456,11 @@ void AutoWashQmlApp::on_timeOutTimerTimeout()
 
 };
 
+void AutoWashQmlApp::on_watchDogTimerTimeout()
+{
+   qDebug()<<"i am alive";
+
+};
 
 };
 
