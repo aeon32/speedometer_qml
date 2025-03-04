@@ -302,6 +302,19 @@ ApplicationWindow {
 
         }
 
+        VisFunc {
+            id: visFunc
+            //visible: parent.mode == "FUNC"  && !parent.playingOneShotVideo
+            visible : true
+            anchors.fill: parent
+            fonts: myFonts
+            state:parent.buttonState
+            onVisibleChanged : {
+               log.debug("visibility of visFunc has became " + this.visible)
+
+            }
+        }        
+
 
 
         VisCleanup {
@@ -366,19 +379,7 @@ ApplicationWindow {
 
         }
 
-        VisFunc {
-            id: visFunc
-            visible: parent.mode == "FUNC"  && !parent.playingOneShotVideo
-            anchors.fill: parent
-            fonts: myFonts
-            state:parent.buttonState
-            onVisibleChanged : {
-               log.debug("visibility of visFunc has became " + this.visible)
 
-            }
-
-
-        }
         VisAdvert {
             id: visAdvert
             visible: parent.mode == "ADVERT"  && !parent.playingOneShotVideo
